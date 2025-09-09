@@ -1,0 +1,43 @@
+﻿@model ST10028058_PROG7312_POE.Models.Issue
+@{
+    ViewData["Title"] = "Issue Details";
+}
+<h2 class="mb-3">@ViewData["Title"]</h2>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <dl class="row mb-0">
+            <dt class="col-sm-3">Submitted</dt>
+            <dd class="col-sm-9">@Model.SubmittedAt.ToString("yyyy-MM-dd HH:mm")</dd>
+
+            <dt class="col-sm-3">Location</dt>
+            <dd class="col-sm-9">@Model.Location</dd>
+
+            <dt class="col-sm-3">Category</dt>
+            <dd class="col-sm-9">@Model.Category</dd>
+
+            <dt class="col-sm-3">Description</dt>
+            <dd class="col-sm-9">@Model.Description</dd>
+
+            <dt class="col-sm-3">Attachment</dt>
+            <dd class="col-sm-9">
+                @if (!string.IsNullOrEmpty(Model.AttachmentFileName))
+                {
+                    <a href="~/uploads/@Model.AttachmentFileName" target="_blank">Open</a>
+                }
+                else
+                {
+
+                    <span class="text-muted">None</span>
+                }
+            </dd>
+        </dl>
+    </div>
+</div>
+
+<div class="d-flex gap-2">
+    <a class="btn btn-secondary" asp-action="Index">Back</a>
+    <a class="btn btn-outline-primary" asp-controller="Feedback" asp-action="Create" asp-route-issueId="@Model.Id">
+        Rate this issue
+    </a>
+</div>

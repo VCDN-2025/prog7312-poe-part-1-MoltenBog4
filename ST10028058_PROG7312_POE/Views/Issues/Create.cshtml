@@ -1,0 +1,90 @@
+﻿@model ST10028058_PROG7312_POE.Models.Issue
+@{
+    ViewData["Title"] = "Report an Issue";
+}
+<h2 class="mb-3">@ViewData["Title"]</h2>
+
+<div class="mb-3">
+    <div class="progress" style="height: 20px;">
+        <div id="progressBar" class="progress-bar" role="progressbar" style="width:0%">0%</div>
+    </div>
+    <small id="encourager" class="text-muted d-block mt-1">
+        Let’s get this sorted — start by adding the location.
+    </small>
+</div>
+
+<form asp-action="Create" method="post" enctype="multipart/form-data" novalidate>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="Location" class="form-label"></label>
+        <input asp-for="Location" class="form-control" placeholder="e.g., 12 Pine Street, Ward 5" />
+        <span asp-validation-for="Location" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Category" class="form-label"></label>
+        <select asp-for="Category" class="form-select"
+                asp-items="Html.GetEnumSelectList<ST10028058_PROG7312_POE.Models.IssueCategory>()">
+            <option value="">-- Select Category --</option>
+        </select>
+        <span asp-validation-for="Category" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label"></label>
+        <textarea asp-for="Description" rows="5" class="form-control"
+                  placeholder="Describe the issue in detail"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Attach image or document (optional)</label>
+        <input type="file" name="attachment" class="form-control" />
+        <div class="form-text">Allowed: .jpg .jpeg .png .gif .pdf .docx</div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit Issue</button>
+    <a asp-action="Index" class="btn btn-secondary">Back</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        // Simple engagement: progress increases as fields are completed
+        const fields = [
+            () => document.querySelector('[name="Location"]').value.trim().length > 0,
+            () => document.querySelector('[name="Category"]').value !== "",
+            () => document.querySelector('[name="Description"]').value.trim().length > 0,
+            () => true // baseline step: page ready
+        ];
+
+        const tips = [
+            "Great! Add the category.",
+            "Nice! Describe the issue.",
+            "Almost there — you can attach a photo (optional).",
+            "Ready to submit!"
+        ];
+
+        const bar = document.getElementById('progressBar');
+        const encourager = document.getElementById('encourager');
+
+        function updateProgress() {
+            let score = 0;
+            for (let i = 0; i < fields.length; i++) if (fields[i]()) score++;
+            const pct = Math.round((score / fields.length) * 100);
+            bar.style.width = pct + '%';
+            bar.textContent = pct + '%';
+
+            let msg = "Let’s get this sorted — start by adding the location.";
+            if (score >= 1) msg = tips[0];
+            if (score >= 2) msg = tips[1];
+            if (score >= 3) msg = tips[2];
+            if (score >= 4) msg = tips[3];
+            encourager.textContent = msg;
+        }
+
+        document.addEventListener('input', updateProgress);
+        document.addEventListener('DOMContentLoaded', updateProgress);
+    </script>
+}

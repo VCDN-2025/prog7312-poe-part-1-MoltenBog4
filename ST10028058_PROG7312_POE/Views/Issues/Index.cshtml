@@ -1,0 +1,91 @@
+﻿@model IEnumerable<ST10028058_PROG7312_POE.Models.Issue>
+@{
+    ViewData["Title"] = "My Reports";
+
+    int totalCount = 0;
+    if (ViewBag.TotalCount is int c) totalCount = c;
+    else { foreach (var _ in Model) totalCount++; }
+
+    string? inviteRaw = TempData["InviteRateIssueId"] as string;
+    Guid inviteId = Guid.Empty;
+    bool hasInvite = !string.IsNullOrWhiteSpace(inviteRaw) && Guid.TryParse(inviteRaw, out inviteId);
+
+    string? successMsg = TempData["Success"] as string;
+}
+<h2 class="mb-3">
+    My Reports
+    <span class="badge text-bg-secondary align-middle">@totalCount</span>
+</h2>
+
+@if (!string.IsNullOrWhiteSpace(successMsg))
+{
+    <div class="alert alert-success">@successMsg</div>
+}
+
+@if (hasInvite)
+{
+    <div class="alert alert-info d-flex align-items-center justify-content-between">
+        <div>Thanks for your report. Please rate your experience to help us improve.</div>
+        <a class="btn btn-sm btn-primary ms-3"
+           asp-controller="Feedback" asp-action="Create" asp-route-issueId="@inviteId">
+            Rate now
+        </a>
+    </div>
+}
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">+ Report a new issue</a>
+</p>
+
+@{
+    bool any = false; foreach (var __ in Model) { any = true; break; }
+}
+
+@if (!any)
+{
+    <div class="alert alert-light border">You haven’t reported any issues yet.</div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-striped align-middle">
+            <thead>
+                <tr>
+                    <th>Submitted</th>
+                    <th>Location</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Attachment</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var i in Model)
+                {
+                    var shortDesc = i.Description ?? "";
+                    if (shortDesc.Length > 80) shortDesc = shortDesc.Substring(0, 80) + "...";
+                    <tr>
+                        <td>@i.SubmittedAt.ToString("yyyy-MM-dd HH:mm")</td>
+                        <td>@i.Location</td>
+                        <td>@i.Category</td>
+                        <td>@shortDesc</td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(i.AttachmentFileName))
+                            {
+                                <a href="~/uploads/@i.AttachmentFileName" target="_blank">View</a>
+                            }
+                            else
+                            {
+
+                                <span class="text-muted">-</span>
+                            }
+                        </td>
+                        <td class="text-end">
+                            <a class="btn btn-sm btn-outline-secondary" asp-action="Details" asp-route-id="@i.Id">Details</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

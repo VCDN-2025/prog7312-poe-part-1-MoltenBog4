@@ -1,0 +1,47 @@
+﻿@model IEnumerable<ST10028058_PROG7312_POE.Models.Feedback>
+@{
+    ViewData["Title"] = "My Feedback History";
+    var issuesRepo = ViewBag.Issues as ST10028058_PROG7312_POE.Services.IIssueRepository;
+}
+<h2 class="mb-3">@ViewData["Title"]</h2>
+
+@{
+    bool any = false;
+    foreach (var _ in Model) { any = true; break; }
+}
+
+@if (!any)
+{
+    <div class="alert alert-light border">You haven’t submitted any feedback yet.</div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-striped align-middle">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Issue</th>
+                    <th>Category</th>
+                    <th>Rating</th>
+                    <th>Comment</th>
+                    <th>Admin Response</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var f in Model)
+                {
+                    var issue = issuesRepo?.GetById(f.IssueId);
+                    <tr>
+                        <td>@f.SubmittedAt.ToString("yyyy-MM-dd HH:mm")</td>
+                        <td>@(issue != null ? issue.Location : f.IssueId.ToString())</td>
+                        <td>@(issue != null ? issue.Category.ToString() : "-")</td>
+                        <td>@f.Rating</td>
+                        <td>@(string.IsNullOrWhiteSpace(f.Comment) ? "-" : f.Comment)</td>
+                        <td>@(string.IsNullOrWhiteSpace(f.AdminResponse) ? "-" : f.AdminResponse)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
