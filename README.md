@@ -24,7 +24,7 @@ To compile and run the application, ensure the following are installed:
 
 Visual Studio 2022 or later
 
-.NET Framework 4.7.2 or higher
+.NET Framework 8
 
 Windows OS
 
