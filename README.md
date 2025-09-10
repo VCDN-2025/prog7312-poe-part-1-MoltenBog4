@@ -1,5 +1,10 @@
 🏙️ Municipal Services Application – Part 1
 
+
+
+
+
+
 Module: PROG7312 – Advanced Application Development
 Assessment: Portfolio of Evidence (PoE) – Part 1
 
@@ -8,14 +13,10 @@ Assessment: Portfolio of Evidence (PoE) – Part 1
 The Municipal Services Application is a C# .NET Framework Windows Forms project designed to improve municipal service delivery and citizen engagement in South Africa.
 
 Part 1 focuses on the Report Issues functionality, which enables citizens to:
-
-Log municipal service delivery issues (e.g., sanitation, roads, water outages).
-
-Provide location, category, and detailed descriptions.
-
-Attach supporting media (images/documents).
-
-Receive basic feedback through an integrated Feedback & Rating System to strengthen transparency and accountability.
+✔️ Log service delivery issues (e.g., sanitation, roads, water outages)
+✔️ Provide location, category, and detailed descriptions
+✔️ Attach supporting media (images/documents)
+✔️ Receive feedback through a Feedback & Rating System
 
 ⚙️ Requirements
 
@@ -28,66 +29,46 @@ Visual Studio 2022 or later
 Windows OS
 
 🚀 Setup Instructions
-1. Clone or Download the Repository
+# 1. Clone the repository
 git clone https://github.com/YourGitHubUsername/MunicipalServicesApp.git
 
+# 2. Open in Visual Studio
+File → Open → Project/Solution → Select .sln file
 
-Or download as a .zip and extract.
+# 3. Build the solution
+Build → Build Solution
 
-2. Open in Visual Studio
-
-Launch Visual Studio.
-
-Navigate to File → Open → Project/Solution.
-
-Open the .sln file in the project root.
-
-3. Build the Solution
-
-Go to Build → Build Solution.
-
-Ensure there are no build errors.
-
-4. Run the Application
-
-Press F5 or click Start Debugging.
-
-The Main Menu form will appear.
+# 4. Run the application
+Press F5 or Start Debugging
 
 🖥️ Application Usage
-Main Menu
+📌 Main Menu
 
-On startup, the following options are presented:
-
-✅ Report Issues (implemented in Part 1)
+✅ Report Issues (active for Part 1)
 
 🚧 Local Events & Announcements (coming in Part 2)
 
 🚧 Service Request Status (coming in Part 3)
 
-➡️ Only Report Issues is active for Part 1.
+📝 Report Issues Page
 
-Report Issues Page
+📍 Location Input – Enter where the issue occurred
 
-Features include:
+🗂️ Category Selection – Choose issue type
 
-📍 Location Input – Enter where the issue occurred.
+📝 Description Box – Detailed information
 
-🗂️ Category Selection – Select the type of issue (e.g., sanitation, roads, utilities).
+📎 Media Attachment – Upload files/images
 
-📝 Description Box – Provide detailed information about the issue.
+✅ Submit Button – Save and confirm
 
-📎 Media Attachment – Upload supporting images/documents.
+🔔 Feedback Message – Thank-you alert
 
-✅ Submit Button – Save and confirm the report.
-
-🔔 Engagement Feature – Displays a thank-you message / progress indicator.
-
-🔙 Back to Main Menu – Return to the home screen.
+🔙 Back – Return to Main Menu
 
 📂 Data Handling
 
-Issues are stored in a List data structure for efficient organisation.
+Uses a List data structure to store issues.
 
 Each report contains:
 
@@ -101,50 +82,50 @@ Attachment path
 
 🎨 Design Principles
 
-Consistency → Uniform colour scheme and layout.
+🎯 Consistency → Uniform colour scheme & layout
 
-Clarity → Clear labels and buttons for ease of use.
+🧾 Clarity → Simple, descriptive labels & buttons
 
-User Feedback → MessageBox alerts for success/errors.
+💬 User Feedback → Success/error alerts
 
-Responsiveness → Designed to adapt to different screen sizes.
+🖥️ Responsiveness → Adjusts to screen sizes
 
-🔑 Role-Based Feedback Management System
+🔑 Role-Based Feedback Management
 👤 Citizens (Users)
 
-Submit service requests (e.g., water outage, pothole).
+Submit service requests
 
-Rate the municipality’s response (stars / emojis / numeric scale).
+Rate responses ⭐⭐⭐⭐⭐
 
-Leave written comments about satisfaction and resolution quality.
+Leave comments
 
-View their feedback history (past reports and ratings).
+View personal feedback history
 
 🛠️ Administrators (Municipality Staff)
 
-View all submitted feedback linked to service reports.
+View all feedback linked to reports
 
-Filter ratings by department, service type, ward, or response-time band.
+Filter by department, service type, or response time
 
-Respond to citizen comments to close the feedback loop.
+Respond to citizen comments
 
-Access analytics dashboards (average ratings, top complaints, trends).
+View analytics dashboards 📊
 
-🔐 User Login Integration
+🔐 Login Integration
 
-Feedback is linked to the authenticated user account (no anonymous posts).
+Feedback tied to authenticated accounts
 
-Users only see their own reports/feedback.
+Users only see their own data
 
-Admins have access to all records.
+Admins have full visibility
 
 🔮 Future Development
 
-Part 2 → Local Events & Announcements (with advanced data structures).
+Part 2 → Local Events & Announcements
 
-Part 3 → Service Request Status tracking (trees, graphs, heaps).
+Part 3 → Service Request Status (trees, graphs, heaps)
 
-Enhancements → Dashboards, gamification, and community participation features.
+Enhancements → Dashboards, gamification, community engagement
 
 👨‍💻 Author
 
@@ -156,15 +137,12 @@ Institution: IIE Varsity College
 
 📚 References
 
-Microsoft, 2023. C# documentation. Microsoft Docs. Available at: https://learn.microsoft.com/en-us/dotnet/csharp/
- [Accessed 21 February 2025].
+Microsoft, 2023. C# documentation. Docs
 
-Microsoft, 2023. .NET Framework documentation. Microsoft Docs. Available at: https://learn.microsoft.com/en-us/dotnet/framework/
- [Accessed 21 February 2025].
+Microsoft, 2023. .NET Framework documentation. Docs
 
-Microsoft, 2023. Windows Forms documentation. Microsoft Docs. Available at: https://learn.microsoft.com/en-us/dotnet/desktop/winforms/
- [Accessed 21 February 2025].
+Microsoft, 2023. Windows Forms documentation. Docs
 
 🎥 Demo Video
 
-👉 Click here to watch the demo
+▶️ Watch the demo on YouTube
