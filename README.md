@@ -1,10 +1,11 @@
 # 🏙️ Municipal Services Application – PROG7312 Portfolio of Evidence
 
 **Module:** PROG7312 – Advanced Application Development  
-**Assessment:** Portfolio of Evidence (PoE) – Part 1–3  
-**Author:** [Your Name]  
-**Student Number:** [Your Student Number]
+**Assessment:** Portfolio of Evidence (PoE) – Part 1
+**Author:** Sashiel Moonsamy 
+**Student Number:** ST10028058
 
+👉 Watch Demo Video on YouTube:https://youtu.be/ONAEioCP_Fk 
 ---
 
 ## 📖 Overview
@@ -62,3 +63,105 @@ The system contributes to improved communication, accountability, and citizen en
 ```bash
 git clone https://github.com/<YourUsername>/<YourRepo>.git
 cd ST10028058_PROG7312_POE
+
+⚙️ Setup Instructions
+
+Open the solution in Visual Studio:
+ST10028058_PROG7312_POE.sln
+
+Restore NuGet packages (Visual Studio should do this automatically).
+
+Database setup:
+
+Update appsettings.json with your SQL Server connection string:
+
+"ConnectionStrings": {
+  "DefaultConnection": "Server=(localdb)\\MSSQLLocalDB;Database=MunicipalServicesDb;Trusted_Connection=True;MultipleActiveResultSets=true"
+}
+
+
+Run the following in Package Manager Console:
+
+Update-Database
+
+
+Seed data: The system automatically seeds roles and users on first run:
+
+Admin → admin@city.gov / Admin123!
+
+Citizen 1 → user@demo.com / Citizen123!
+
+Citizen 2 → second@demo.com / Citizen456!
+
+▶️ Run the Application
+
+Press F5 in Visual Studio, or run:
+
+dotnet run
+
+
+Open a browser at:
+https://localhost:5001 or http://localhost:5000
+
+👥 Usage
+For Citizens
+
+Login with a citizen account.
+
+Click Report Issues to submit a new issue.
+
+View your own reports under My Reports.
+
+After submitting, provide a rating/feedback.
+
+Check past submissions under My Feedback.
+
+For Admins
+
+Login with the Admin account.
+
+Navigate to All Issues to see every report.
+
+Navigate to All Feedback to review all citizen feedback.
+
+Use the Respond option to provide an official reply.
+
+🎥 Demo Video
+
+A full walkthrough of the system (citizen & admin features, reporting, feedback, and responses) is available here:
+👉 Watch Demo Video on YouTube:https://youtu.be/ONAEioCP_Fk 
+
+
+
+
+📜 Academic Notes
+
+Developed for PROG7312 Advanced Application Development.
+
+Implements user engagement strategies such as:
+
+Real-time notifications after submissions.
+
+Ratings & feedback for improved transparency.
+
+Demonstrates role-based access (Citizen vs Admin).
+
+Uses custom data structures instead of built-in collections.
+
+📚 References
+
+Microsoft Docs – ASP.NET Core MVC
+
+Microsoft Docs – ASP.NET Core Identity
+
+Bootswatch – Brite Theme
+
+PROG7312 PoE Specification Document (2025)
+
+Gido, Clements & Baker – Successful Project Management, 7th Edition (for project management methodology context)
+
+👨‍💻 Author
+
+Name: sashiel Moonsamy
+
+Student Number: ST10028058
