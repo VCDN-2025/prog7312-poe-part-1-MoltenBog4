@@ -1,5 +1,3 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/IbFBjHe5)
-
 🏙️ Municipal Services Application – Part 1
 
 Module: PROG7312 – Advanced Application Development
@@ -25,7 +23,7 @@ To compile and run the application, ensure the following are installed:
 
 Visual Studio 2022 or later
 
-.NET Framework 8
+.NET Framework 4.7.2 or higher
 
 Windows OS
 
@@ -61,17 +59,17 @@ Main Menu
 
 On startup, the following options are presented:
 
-Report Issues ✅ (implemented in Part 1)
+✅ Report Issues (implemented in Part 1)
 
-Local Events & Announcements 🚧 (coming in Part 2)
+🚧 Local Events & Announcements (coming in Part 2)
 
-Service Request Status 🚧 (coming in Part 3)
+🚧 Service Request Status (coming in Part 3)
 
 ➡️ Only Report Issues is active for Part 1.
 
 Report Issues Page
 
-Features:
+Features include:
 
 📍 Location Input – Enter where the issue occurred.
 
@@ -114,8 +112,6 @@ Responsiveness → Designed to adapt to different screen sizes.
 🔑 Role-Based Feedback Management System
 👤 Citizens (Users)
 
-After logging in, users can:
-
 Submit service requests (e.g., water outage, pothole).
 
 Rate the municipality’s response (stars / emojis / numeric scale).
@@ -125,8 +121,6 @@ Leave written comments about satisfaction and resolution quality.
 View their feedback history (past reports and ratings).
 
 🛠️ Administrators (Municipality Staff)
-
-Admins can:
 
 View all submitted feedback linked to service reports.
 
@@ -173,4 +167,4 @@ Microsoft, 2023. Windows Forms documentation. Microsoft Docs. Available at: http
 
 🎥 Demo Video
 
-👉 Click here to watch the video demonstration: https://youtu.be/dK408b3_sqI 
+👉 Click here to watch the demo
