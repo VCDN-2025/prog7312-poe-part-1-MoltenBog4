@@ -8,5 +8,8 @@ namespace ST10028058_PROG7312_POE.Services
         IEnumerable<Feedback> GetForIssue(Guid issueId);
         (double average, int count) GetSummary(Guid issueId);
         int TotalCount { get; }
+
+        Feedback? GetById(Guid id);
+        bool SetAdminResponse(Guid feedbackId, string? response, int? responseTimeMinutes);
     }
 }

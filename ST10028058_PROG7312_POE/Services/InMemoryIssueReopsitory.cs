@@ -83,5 +83,26 @@ namespace ST10028058_PROG7312_POE.Services
             }
             return (count == 0 ? 0.0 : (double)sum / count, count);
         }
+
+        public Feedback? GetById(Guid id)
+        {
+            foreach (var f in _items)
+                if (f.Id == id) return f;
+            return null;
+        }
+
+        public bool SetAdminResponse(Guid feedbackId, string? response, int? responseTimeMinutes)
+        {
+            foreach (var f in _items)
+            {
+                if (f.Id == feedbackId)
+                {
+                    f.AdminResponse = response;
+                    f.ResponseTimeMinutes = responseTimeMinutes;
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

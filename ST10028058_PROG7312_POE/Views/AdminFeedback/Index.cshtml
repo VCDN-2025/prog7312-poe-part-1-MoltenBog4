@@ -1,8 +1,15 @@
 ﻿@{
     ViewData["Title"] = "All Feedback & Ratings";
     var rows = ViewBag.Rows as IEnumerable<(ST10028058_PROG7312_POE.Models.Feedback f, ST10028058_PROG7312_POE.Models.Issue? i)>;
+    string? success = TempData["Success"] as string;
 }
+
 <h2 class="mb-3">@ViewData["Title"]</h2>
+
+@if (!string.IsNullOrWhiteSpace(success))
+{
+    <div class="alert alert-success shadow-sm rounded">@success</div>
+}
 
 @{
     bool any = false;
@@ -11,47 +18,81 @@
 
 @if (!any)
 {
-    <div class="alert alert-light border">No feedback submitted yet.</div>
+    <div class="alert alert-light border rounded shadow-sm">No feedback submitted yet.</div>
 }
 else
 {
-    <div class="table-responsive">
-        <table class="table table-striped align-middle">
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Issue</th>
-                    <th>Category</th>
-                    <th>Citizen (id)</th>
-                    <th>Rating</th>
-                    <th>Comment</th>
-                    <th>Admin Response</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var row in rows!)
-                {
-                    var f = row.f;
-                    var i = row.i;
-                    <tr>
-                        <td>@f.SubmittedAt.ToString("yyyy-MM-dd HH:mm")</td>
-                        <td>@(i != null ? i.Location : f.IssueId.ToString())</td>
-                        <td>@(i != null ? i.Category.ToString() : "-")</td>
-                        <td>@(string.IsNullOrWhiteSpace(f.CitizenUserId) ? "-" : f.CitizenUserId)</td>
-                        <td>@f.Rating</td>
-                        <td>@(string.IsNullOrWhiteSpace(f.Comment) ? "-" : f.Comment)</td>
-                        <td>@(string.IsNullOrWhiteSpace(f.AdminResponse) ? "-" : f.AdminResponse)</td>
-                        <td class="text-end">
-                            @if (i != null)
-                            {
-                                <a class="btn btn-sm btn-outline-secondary"
-                                   asp-controller="AdminIssues" asp-action="Details" asp-route-id="@i.Id">Open issue</a>
-                            }
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+    <div class="card shadow-sm rounded">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered mb-0 align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th style="width: 12%">Date</th>
+                            <th style="width: 20%">Issue</th>
+                            <th style="width: 12%">Category</th>
+                            <th style="width: 18%">Citizen (id)</th>
+                            <th style="width: 8%">Rating</th>
+                            <th>Comment</th>
+                            <th style="width: 14%">Admin Status</th>
+                            <th style="width: 16%"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var row in rows!)
+                        {
+                            var f = row.f;
+                            var i = row.i;
+                            bool responded = !string.IsNullOrWhiteSpace(f.AdminResponse);
+
+                            <tr>
+                                <td><span class="badge text-bg-secondary">@f.SubmittedAt.ToString("yyyy-MM-dd HH:mm")</span></td>
+                                <td>@(i != null ? i.Location : f.IssueId.ToString())</td>
+                                <td>
+                                    @if (i != null)
+                                    {
+                                        <span class="badge rounded-pill text-bg-info">@i.Category</span>
+                                    }
+                                    else
+                                    {
+
+                                        <span class="text-muted">-</span>
+                                    }
+                                </td>
+                                <td>@(string.IsNullOrWhiteSpace(f.CitizenUserId) ? "-" : f.CitizenUserId)</td>
+                                <td><span class="badge rounded-pill text-bg-primary">@f.Rating</span></td>
+                                <td>@(string.IsNullOrWhiteSpace(f.Comment) ? "-" : f.Comment)</td>
+                                <td>
+                                    @if (responded)
+                                    {
+                                        <div class="mb-1">
+                                            <span class="badge rounded-pill text-bg-success">Responded</span>
+                                            @if (f.ResponseTimeMinutes.HasValue)
+                                            {
+                                                <span class="ms-1 small text-muted">(@f.ResponseTimeMinutes min)</span>
+                                            }
+                                        </div>
+                                        <div class="small text-body">@f.AdminResponse</div>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge rounded-pill text-bg-warning text-dark">Awaiting response</span>
+                                    }
+                                </td>
+                                <td class="text-end">
+                                    <a class="btn btn-sm btn-outline-primary"
+                                       asp-action="Respond" asp-route-id="@f.Id">Respond</a>
+                                    @if (i != null)
+                                    {
+                                        <a class="btn btn-sm btn-outline-secondary ms-1"
+                                           asp-controller="AdminIssues" asp-action="Details" asp-route-id="@i.Id">Open issue</a>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 }
