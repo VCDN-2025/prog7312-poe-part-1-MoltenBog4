@@ -129,9 +129,9 @@ Enhancements → Dashboards, gamification, community engagement
 
 👨‍💻 Author
 
-Student Name: [Your Full Name]
+Student Name: Sashiel Moonsamy
 
-Student Number: [Your Student ID]
+Student Number: ST10028058
 
 Institution: IIE Varsity College
 
