@@ -30,7 +30,7 @@ Windows OS
 
 🚀 Setup Instructions
 # 1. Clone the repository
-git clone https://github.com/YourGitHubUsername/MunicipalServicesApp.git
+git clone https://github.com/VCDN-2025/prog7312-poe-part-1-MoltenBog4.git
 
 # 2. Open in Visual Studio
 File → Open → Project/Solution → Select .sln file
@@ -145,4 +145,4 @@ Microsoft, 2023. Windows Forms documentation. Docs
 
 🎥 Demo Video
 
-▶️ Watch the demo on YouTube
+▶️ Watch the demo on YouTube:https://youtu.be/dK408b3_sqI 
