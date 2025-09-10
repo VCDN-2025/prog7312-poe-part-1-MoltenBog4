@@ -27,7 +27,6 @@ wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css
 wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css.map
 wwwroot\lib\bootstrap\dist\css\bootstrap.css
 wwwroot\lib\bootstrap\dist\css\bootstrap.css.map
-wwwroot\lib\bootstrap\dist\css\bootstrap.min.css
 wwwroot\lib\bootstrap\dist\css\bootstrap.min.css.map
 wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css
 wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css.map
@@ -59,7 +58,11 @@ wwwroot\lib\jquery\dist\jquery.min.js
 wwwroot\lib\jquery\dist\jquery.min.map
 wwwroot\lib\jquery\LICENSE.txt
 wwwroot\uploads\12e2f4d7-842c-4fc5-a385-30c9dec971f9.pdf
+wwwroot\uploads\16923fda-0482-4e4a-9f90-d5b0252afbc1.pdf
 wwwroot\uploads\2007c7f6-027d-4f87-a026-7f1f83cf9014.pdf
 wwwroot\uploads\7b3ab9f9-0b8d-4b6d-970c-0d15833341a2.jpg
 wwwroot\uploads\abbae3f1-6768-41d5-9e0f-9cb52b16ae88.pdf
+wwwroot\uploads\c0c68c12-ce2c-4572-b7c7-c57ff8164251.pdf
 wwwroot\uploads\edfc2be1-bdd6-4a59-a2ba-3a6aa96922af.jpg
+wwwroot\uploads\fd13b555-f9c1-4a1e-b44c-372321d08a3a.pdf
+wwwroot\lib\bootstrap\dist\css\bootstrap.min.css

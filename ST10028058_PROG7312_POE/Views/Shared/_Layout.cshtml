@@ -40,7 +40,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm bg-primary  border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ST10028058_PROG7312_POE</a>
 
@@ -54,7 +54,7 @@
                     <!-- Left: app navigation -->
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark @Active("issues", "create")"
+                            <a class="nav-link  @Active("issues", "create")"
                                asp-controller="Issues" asp-action="Create">Report Issues</a>
                         </li>
 
@@ -71,7 +71,7 @@
                         </li>
 
                         <li class="nav-item ms-sm-3">
-                            <a class="nav-link text-dark @Active("issues", "index")"
+                            <a class="nav-link  @Active("issues", "index")"
                                asp-controller="Issues" asp-action="Index">All Reports</a>
                         </li>
 
@@ -79,14 +79,14 @@
                         @if (SignInManager.IsSignedIn(User) && User.IsInRole("Citizen"))
                         {
                             <li class="nav-item ms-sm-3">
-                                <a class="nav-link text-dark @Active("feedback", "myhistory")"
+                                <a class="nav-link  @Active("feedback", "myhistory")"
                                    asp-controller="Feedback" asp-action="MyHistory">My Feedback</a>
                             </li>
                         }
                         @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                         {
                             <li class="nav-item ms-sm-3">
-                                <a class="nav-link text-dark @Active("adminfeedback", "index")"
+                                <a class="nav-link  @Active("adminfeedback", "index")"
                                    asp-controller="AdminFeedback" asp-action="Index">Manage Feedback</a>
                             </li>
                         }
