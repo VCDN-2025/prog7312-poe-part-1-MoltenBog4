@@ -1,11 +1,12 @@
 # 🏙️ Municipal Services Application – PROG7312 Portfolio of Evidence
 
 **Module:** PROG7312 – Advanced Application Development  
-**Assessment:** Portfolio of Evidence (PoE) – Part 1
-**Author:** Sashiel Moonsamy 
-**Student Number:** ST10028058
+**Assessment:** Portfolio of Evidence (PoE) – Part 1–3  
+**Author:** Sashiel Moonsamy  
+**Student Number:** ST10028058  
 
-👉 Watch Demo Video on YouTube:https://youtu.be/ONAEioCP_Fk 
+👉 [**Watch Demo Video on YouTube**](https://youtu.be/ONAEioCP_Fk)
+
 ---
 
 ## 📖 Overview
@@ -14,9 +15,9 @@ The **Municipal Services Application** is a C# **ASP.NET Core MVC web applicatio
 It provides a **digital platform** for South African citizens to report municipal issues, track progress, and strengthen transparency between residents and local municipalities.
 
 The application incorporates:
-- **Citizen functionality** (report issues, leave ratings and feedback, view personal reports and feedback history)
-- **Administrator functionality** (view all reported issues, see all citizen feedback, respond to feedback, filter reports)
-- **Custom-built data structures** for storage (no generic collections such as `List<T>` are used)
+- **Citizen functionality** (report issues, leave ratings and feedback, view personal reports and feedback history)  
+- **Administrator functionality** (view all reported issues, see all citizen feedback, respond to feedback, filter reports)  
+- **Custom-built data structures** for storage (no generic collections such as `List<T>` are used)  
 
 The system contributes to improved communication, accountability, and citizen engagement.
 
@@ -25,37 +26,37 @@ The system contributes to improved communication, accountability, and citizen en
 ## ✨ Features
 
 ### Citizens
-- Submit new **service issue reports** (e.g., potholes, outages, sanitation).
-- Attach optional images or documents as evidence.
-- View only **their own issues** in a personal dashboard.
-- Provide **ratings and written feedback** on the municipality’s response.
-- Access a **feedback history** page.
+- Submit new **service issue reports** (e.g., potholes, outages, sanitation).  
+- Attach optional images or documents as evidence.  
+- View only **their own issues** in a personal dashboard.  
+- Provide **ratings and written feedback** on the municipality’s response.  
+- Access a **feedback history** page.  
 
 ### Administrators
-- Log in with Admin credentials.
-- View **all reported issues** across all users.
-- View **all feedback and ratings** across all issues.
-- **Respond** to citizen feedback and track response times.
-- Filter and monitor service delivery performance by category.
+- Log in with Admin credentials.  
+- View **all reported issues** across all users.  
+- View **all feedback and ratings** across all issues.  
+- **Respond** to citizen feedback and track response times.  
+- Filter and monitor service delivery performance by category.  
 
 ---
 
 ## 🛠️ Technology Stack
 
-- **ASP.NET Core 8.0 MVC**
-- **Entity Framework Core (Identity for roles & login)**
-- **SQL Server / SSMS** for authentication & persistence
-- **Bootstrap (Bootswatch Brite theme)** for styling
-- **Custom Data Structures**: `SinglyLinkedList<T>` used for storing issues and feedback
+- **ASP.NET Core 8.0 MVC**  
+- **Entity Framework Core (Identity for roles & login)**  
+- **SQL Server / SSMS** for authentication & persistence  
+- **Bootstrap (Bootswatch Brite theme)** for styling  
+- **Custom Data Structures**: `SinglyLinkedList<T>` used for storing issues and feedback  
 
 ---
 
 ## 🚀 Getting Started
 
 ### ✅ Prerequisites
-- Visual Studio 2022 (with ASP.NET and web development workload)
-- .NET 8.0 SDK
-- SQL Server Management Studio (SSMS) for database access
+- Visual Studio 2022 (with ASP.NET and web development workload)  
+- .NET 8.0 SDK  
+- SQL Server Management Studio (SSMS) for database access  
 
 ---
 
@@ -129,10 +130,12 @@ Use the Respond option to provide an official reply.
 🎥 Demo Video
 
 A full walkthrough of the system (citizen & admin features, reporting, feedback, and responses) is available here:
-👉 Watch Demo Video on YouTube:https://youtu.be/ONAEioCP_Fk 
 
+👉 Watch Demo Video on YouTube
 
+📸 Screenshots
 
+(Insert screenshots of Report Issue form, My Reports page, Admin dashboard, Feedback list, etc.)
 
 📜 Academic Notes
 
@@ -140,7 +143,7 @@ Developed for PROG7312 Advanced Application Development.
 
 Implements user engagement strategies such as:
 
-Real-time notifications after submissions.
+
 
 Ratings & feedback for improved transparency.
 
@@ -158,10 +161,10 @@ Bootswatch – Brite Theme
 
 PROG7312 PoE Specification Document (2025)
 
-Gido, Clements & Baker – Successful Project Management, 7th Edition (for project management methodology context)
+Gido, Clements & Baker – Successful Project Management, 7th Edition
 
 👨‍💻 Author
 
-Name: sashiel Moonsamy
+Name: Sashiel Moonsamy
 
 Student Number: ST10028058
