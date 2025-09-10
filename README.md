@@ -6,6 +6,7 @@
 **Student Number:** ST10028058  
 
 👉 [**Watch Demo Video on YouTube**](https://youtu.be/ONAEioCP_Fk)
+https://youtu.be/ONAEioCP_Fk
 
 ---
 
@@ -101,9 +102,6 @@ Press F5 in Visual Studio, or run:
 dotnet run
 
 
-Open a browser at:
-https://localhost:5001 or http://localhost:5000
-
 👥 Usage
 For Citizens
 
@@ -131,19 +129,14 @@ Use the Respond option to provide an official reply.
 
 A full walkthrough of the system (citizen & admin features, reporting, feedback, and responses) is available here:
 
-👉 Watch Demo Video on YouTube
+👉 Watch Demo Video on YouTube:https://youtu.be/ONAEioCP_Fk
 
-📸 Screenshots
-
-(Insert screenshots of Report Issue form, My Reports page, Admin dashboard, Feedback list, etc.)
 
 📜 Academic Notes
 
 Developed for PROG7312 Advanced Application Development.
 
 Implements user engagement strategies such as:
-
-
 
 Ratings & feedback for improved transparency.
 
