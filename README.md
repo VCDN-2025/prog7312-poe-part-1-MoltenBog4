@@ -1,7 +1,7 @@
 # 🏙️ Municipal Services Application – PROG7312 Portfolio of Evidence
 
 **Module:** PROG7312 – Advanced Application Development  
-**Assessment:** Portfolio of Evidence (PoE) – Part 1–3  
+**Assessment:** Portfolio of Evidence (PoE) – Part 1
 **Author:** Sashiel Moonsamy  
 **Student Number:** ST10028058  
 
