@@ -1,148 +1,64 @@
-🏙️ Municipal Services Application – Part 1
+# 🏙️ Municipal Services Application – PROG7312 Portfolio of Evidence
 
+**Module:** PROG7312 – Advanced Application Development  
+**Assessment:** Portfolio of Evidence (PoE) – Part 1–3  
+**Author:** [Your Name]  
+**Student Number:** [Your Student Number]
 
+---
 
+## 📖 Overview
 
+The **Municipal Services Application** is a C# **ASP.NET Core MVC web application** developed as part of the PROG7312 PoE.  
+It provides a **digital platform** for South African citizens to report municipal issues, track progress, and strengthen transparency between residents and local municipalities.
 
+The application incorporates:
+- **Citizen functionality** (report issues, leave ratings and feedback, view personal reports and feedback history)
+- **Administrator functionality** (view all reported issues, see all citizen feedback, respond to feedback, filter reports)
+- **Custom-built data structures** for storage (no generic collections such as `List<T>` are used)
 
-Module: PROG7312 – Advanced Application Development
-Assessment: Portfolio of Evidence (PoE) – Part 1
+The system contributes to improved communication, accountability, and citizen engagement.
 
-📖 Overview
+---
 
-The Municipal Services Application is a C# .NET Framework Windows Forms project designed to improve municipal service delivery and citizen engagement in South Africa.
+## ✨ Features
 
-Part 1 focuses on the Report Issues functionality, which enables citizens to:
-✔️ Log service delivery issues (e.g., sanitation, roads, water outages)
-✔️ Provide location, category, and detailed descriptions
-✔️ Attach supporting media (images/documents)
-✔️ Receive feedback through a Feedback & Rating System
+### Citizens
+- Submit new **service issue reports** (e.g., potholes, outages, sanitation).
+- Attach optional images or documents as evidence.
+- View only **their own issues** in a personal dashboard.
+- Provide **ratings and written feedback** on the municipality’s response.
+- Access a **feedback history** page.
 
-⚙️ Requirements
+### Administrators
+- Log in with Admin credentials.
+- View **all reported issues** across all users.
+- View **all feedback and ratings** across all issues.
+- **Respond** to citizen feedback and track response times.
+- Filter and monitor service delivery performance by category.
 
-To compile and run the application, ensure the following are installed:
+---
 
-Visual Studio 2022 or later
+## 🛠️ Technology Stack
 
-.NET Framework 8
+- **ASP.NET Core 8.0 MVC**
+- **Entity Framework Core (Identity for roles & login)**
+- **SQL Server / SSMS** for authentication & persistence
+- **Bootstrap (Bootswatch Brite theme)** for styling
+- **Custom Data Structures**: `SinglyLinkedList<T>` used for storing issues and feedback
 
-Windows OS
+---
 
-🚀 Setup Instructions
-# 1. Clone the repository
-git clone https://github.com/VCDN-2025/prog7312-poe-part-1-MoltenBog4.git
+## 🚀 Getting Started
 
-# 2. Open in Visual Studio
-File → Open → Project/Solution → Select .sln file
+### ✅ Prerequisites
+- Visual Studio 2022 (with ASP.NET and web development workload)
+- .NET 8.0 SDK
+- SQL Server Management Studio (SSMS) for database access
 
-# 3. Build the solution
-Build → Build Solution
+---
 
-# 4. Run the application
-Press F5 or Start Debugging
-
-🖥️ Application Usage
-📌 Main Menu
-
-✅ Report Issues (active for Part 1)
-
-🚧 Local Events & Announcements (coming in Part 2)
-
-🚧 Service Request Status (coming in Part 3)
-
-📝 Report Issues Page
-
-📍 Location Input – Enter where the issue occurred
-
-🗂️ Category Selection – Choose issue type
-
-📝 Description Box – Detailed information
-
-📎 Media Attachment – Upload files/images
-
-✅ Submit Button – Save and confirm
-
-🔔 Feedback Message – Thank-you alert
-
-🔙 Back – Return to Main Menu
-
-📂 Data Handling
-
-Uses a List data structure to store issues.
-
-Each report contains:
-
-Location
-
-Category
-
-Description
-
-Attachment path
-
-🎨 Design Principles
-
-🎯 Consistency → Uniform colour scheme & layout
-
-🧾 Clarity → Simple, descriptive labels & buttons
-
-💬 User Feedback → Success/error alerts
-
-🖥️ Responsiveness → Adjusts to screen sizes
-
-🔑 Role-Based Feedback Management
-👤 Citizens (Users)
-
-Submit service requests
-
-Rate responses ⭐⭐⭐⭐⭐
-
-Leave comments
-
-View personal feedback history
-
-🛠️ Administrators (Municipality Staff)
-
-View all feedback linked to reports
-
-Filter by department, service type, or response time
-
-Respond to citizen comments
-
-View analytics dashboards 📊
-
-🔐 Login Integration
-
-Feedback tied to authenticated accounts
-
-Users only see their own data
-
-Admins have full visibility
-
-🔮 Future Development
-
-Part 2 → Local Events & Announcements
-
-Part 3 → Service Request Status (trees, graphs, heaps)
-
-Enhancements → Dashboards, gamification, community engagement
-
-👨‍💻 Author
-
-Student Name: Sashiel Moonsamy
-
-Student Number: ST10028058
-
-Institution: IIE Varsity College
-
-📚 References
-
-Microsoft, 2023. C# documentation. Docs
-
-Microsoft, 2023. .NET Framework documentation. Docs
-
-Microsoft, 2023. Windows Forms documentation. Docs
-
-🎥 Demo Video
-
-▶️ Watch the demo on YouTube:https://youtu.be/ONAEioCP_Fk 
+### 📂 Clone the Repository
+```bash
+git clone https://github.com/<YourUsername>/<YourRepo>.git
+cd ST10028058_PROG7312_POE
