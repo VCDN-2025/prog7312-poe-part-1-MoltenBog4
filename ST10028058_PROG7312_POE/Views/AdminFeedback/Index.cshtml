@@ -1,0 +1,57 @@
+﻿@{
+    ViewData["Title"] = "All Feedback & Ratings";
+    var rows = ViewBag.Rows as IEnumerable<(ST10028058_PROG7312_POE.Models.Feedback f, ST10028058_PROG7312_POE.Models.Issue? i)>;
+}
+<h2 class="mb-3">@ViewData["Title"]</h2>
+
+@{
+    bool any = false;
+    if (rows != null) { foreach (var _ in rows) { any = true; break; } }
+}
+
+@if (!any)
+{
+    <div class="alert alert-light border">No feedback submitted yet.</div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-striped align-middle">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Issue</th>
+                    <th>Category</th>
+                    <th>Citizen (id)</th>
+                    <th>Rating</th>
+                    <th>Comment</th>
+                    <th>Admin Response</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var row in rows!)
+                {
+                    var f = row.f;
+                    var i = row.i;
+                    <tr>
+                        <td>@f.SubmittedAt.ToString("yyyy-MM-dd HH:mm")</td>
+                        <td>@(i != null ? i.Location : f.IssueId.ToString())</td>
+                        <td>@(i != null ? i.Category.ToString() : "-")</td>
+                        <td>@(string.IsNullOrWhiteSpace(f.CitizenUserId) ? "-" : f.CitizenUserId)</td>
+                        <td>@f.Rating</td>
+                        <td>@(string.IsNullOrWhiteSpace(f.Comment) ? "-" : f.Comment)</td>
+                        <td>@(string.IsNullOrWhiteSpace(f.AdminResponse) ? "-" : f.AdminResponse)</td>
+                        <td class="text-end">
+                            @if (i != null)
+                            {
+                                <a class="btn btn-sm btn-outline-secondary"
+                                   asp-controller="AdminIssues" asp-action="Details" asp-route-id="@i.Id">Open issue</a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

@@ -1,0 +1,56 @@
+﻿@model IEnumerable<ST10028058_PROG7312_POE.Models.Issue>
+@{
+    ViewData["Title"] = "All Issues";
+}
+<h2 class="mb-3">@ViewData["Title"]</h2>
+
+@{
+    bool any = false; foreach (var _ in Model) { any = true; break; }
+}
+@if (!any)
+{
+    <div class="alert alert-light border">No issues reported yet.</div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-striped align-middle">
+            <thead>
+                <tr>
+                    <th>Submitted</th>
+                    <th>Location</th>
+                    <th>Category</th>
+                    <th>By</th>
+                    <th>Attachment</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var i in Model)
+                {
+                    <tr>
+                        <td>@i.SubmittedAt.ToString("yyyy-MM-dd HH:mm")</td>
+                        <td>@i.Location</td>
+                        <td>@i.Category</td>
+                        <td>@(string.IsNullOrWhiteSpace(i.CreatedByName) ? i.CreatedByUserId : i.CreatedByName)</td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(i.AttachmentFileName))
+                            {
+                                <a href="~/uploads/@i.AttachmentFileName" target="_blank">View</a>
+                            }
+                            else
+                            {
+
+                                <span class="text-muted">-</span>
+                            }
+                        </td>
+                        <td class="text-end">
+                            <a class="btn btn-sm btn-outline-secondary"
+                               asp-action="Details" asp-route-id="@i.Id">Open</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

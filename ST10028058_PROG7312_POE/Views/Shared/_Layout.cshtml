@@ -1,6 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<ST10028058_PROG7312_POE.Models.ApplicationUser> SignInManager
-@inject UserManager<ST10028058_PROG7312_POE.Models.ApplicationUser> UserManager
 
 @{
     var currentController = (ViewContext.RouteData.Values["controller"]?.ToString() ?? "").ToLowerInvariant();
@@ -40,7 +39,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm bg-primary  border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm bg-primary border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ST10028058_PROG7312_POE</a>
 
@@ -51,10 +50,9 @@
                 </button>
 
                 <div id="mainNavbar" class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <!-- Left: app navigation -->
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link  @Active("issues", "create")"
+                            <a class="nav-link @Active("issues", "create")"
                                asp-controller="Issues" asp-action="Create">Report Issues</a>
                         </li>
 
@@ -71,28 +69,30 @@
                         </li>
 
                         <li class="nav-item ms-sm-3">
-                            <a class="nav-link  @Active("issues", "index")"
+                            <a class="nav-link @Active("issues", "index")"
                                asp-controller="Issues" asp-action="Index">All Reports</a>
                         </li>
 
-                        @* Role-aware shortcuts *@
                         @if (SignInManager.IsSignedIn(User) && User.IsInRole("Citizen"))
                         {
                             <li class="nav-item ms-sm-3">
-                                <a class="nav-link  @Active("feedback", "myhistory")"
+                                <a class="nav-link @Active("feedback", "myhistory")"
                                    asp-controller="Feedback" asp-action="MyHistory">My Feedback</a>
                             </li>
                         }
                         @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                         {
                             <li class="nav-item ms-sm-3">
-                                <a class="nav-link  @Active("adminfeedback", "index")"
-                                   asp-controller="AdminFeedback" asp-action="Index">Manage Feedback</a>
+                                <a class="nav-link @Active("adminissues", "index")"
+                                   asp-controller="AdminIssues" asp-action="Index">All Issues</a>
+                            </li>
+                            <li class="nav-item ms-sm-3">
+                                <a class="nav-link @Active("adminfeedback", "index")"
+                                   asp-controller="AdminFeedback" asp-action="Index">All Feedback</a>
                             </li>
                         }
                     </ul>
 
-                    <!-- Right: auth area -->
                     <ul class="navbar-nav">
                         @if (SignInManager.IsSignedIn(User))
                         {
@@ -106,7 +106,7 @@
                                     else if (User.IsInRole("Citizen"))
                                     {
 
-                                        <span class="badge bg-primary ms-1">Citizen</span>
+                                        <span class="badge bg-info ms-1">Citizen</span>
                                     }
                                 </span>
                             </li>
@@ -120,10 +120,12 @@
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link @Active("account", "login")" asp-controller="Account" asp-action="Login">Login</a>
+                                <a class="nav-link @Active("account", "login")"
+                                   asp-controller="Account" asp-action="Login">Login</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link @Active("account", "register")" asp-controller="Account" asp-action="Register">Register</a>
+                                <a class="nav-link @Active("account", "register")"
+                                   asp-controller="Account" asp-action="Register">Register</a>
                             </li>
                         }
                     </ul>
