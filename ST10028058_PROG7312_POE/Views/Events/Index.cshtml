@@ -1,0 +1,123 @@
+﻿@model List<ST10028058_PROG7312_POE.Models.EventModel>
+@{
+    ViewData["Title"] = "Local Events & Announcements";
+}
+
+<div class="container mt-4">
+    <h2 class="text-success mb-4 text-center">
+        🌿 Local Events & Announcements
+    </h2>
+
+    <!-- Search, Filter, Sort -->
+    <form method="get" class="row g-3 mb-4 justify-content-center align-items-end">
+        <div class="col-md-3">
+            <label class="form-label fw-bold text-success">Keyword</label>
+            <input type="text" name="keyword" class="form-control border-success" placeholder="Search title or description..." />
+        </div>
+
+        <div class="col-md-2">
+            <label class="form-label fw-bold text-success">Category</label>
+            <select name="searchCategory" class="form-select border-success">
+                <option value="">All Categories</option>
+                @foreach (var cat in ViewBag.Categories as HashSet<string>)
+                {
+                    <option value="@cat">@cat</option>
+                }
+            </select>
+        </div>
+
+        <div class="col-md-2">
+            <label class="form-label fw-bold text-success">From Date</label>
+            <input type="date" name="fromDate" class="form-control border-success" />
+        </div>
+
+        <div class="col-md-2">
+            <label class="form-label fw-bold text-success">To Date</label>
+            <input type="date" name="toDate" class="form-control border-success" />
+        </div>
+
+        <div class="col-md-2">
+            <label class="form-label fw-bold text-success">Sort By</label>
+            <select name="sortOption" class="form-select border-success">
+                <option value="">Default</option>
+                <option value="date">Date</option>
+                <option value="category">Category</option>
+                <option value="title">Title</option>
+            </select>
+        </div>
+
+        <div class="col-md-1 d-grid">
+            <button type="submit" class="btn btn-success">🔍</button>
+        </div>
+
+        <div class="col-md-12 text-center mt-2">
+            <a href="@Url.Action("Index", "Events")" class="btn btn-outline-success btn-sm">Clear Filters</a>
+        </div>
+    </form>
+
+    <!-- Events Grid -->
+    <div class="row">
+        @if (!Model.Any())
+        {
+            <div class="text-center text-muted mt-4">
+                <p>No events found. Try adjusting your filters or date range.</p>
+            </div>
+        }
+        else
+        {
+            @foreach (var ev in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card border-success shadow-sm h-100 hover-shadow transition">
+                        <div class="card-body">
+                            <h5 class="card-title text-success fw-bold">@ev.Title</h5>
+                            <p class="card-text small">
+                                <strong>📅 Date:</strong> @ev.Date.ToString("dd MMM yyyy")<br />
+                                <strong>🏷 Category:</strong> @ev.Category<br />
+                                <strong>📍 Location:</strong> @ev.Location
+                            </p>
+                            <p class="card-text">@ev.Description</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+
+    <!-- Recommendations -->
+    <div class="mt-5 mb-5">
+        <h4 class="text-success mb-3 text-center">🌟 Recommended for You</h4>
+        <div class="row justify-content-center">
+            @if (ViewBag.Recommendations != null && ((List<ST10028058_PROG7312_POE.Models.EventModel>)ViewBag.Recommendations).Any())
+            {
+                foreach (var ev in ViewBag.Recommendations as List<ST10028058_PROG7312_POE.Models.EventModel>)
+                {
+                    <div class="col-md-3 mb-3">
+                        <div class="card border-success shadow-sm">
+                            <div class="card-body">
+                                <h6 class="card-title fw-bold">@ev.Title</h6>
+                                <p class="text-muted small">@ev.Category • @ev.Date.ToString("dd MMM yyyy")</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <p class="text-center text-muted">Your personalized recommendations will appear here after some searches.</p>
+            }
+        </div>
+    </div>
+</div>
+
+<style>
+    .card:hover {
+        transform: scale(1.02);
+        transition: 0.3s ease-in-out;
+        box-shadow: 0 4px 10px rgba(0, 128, 0, 0.2);
+    }
+
+    .form-label {
+        font-size: 0.9rem;
+    }
+</style>

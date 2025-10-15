@@ -1,0 +1,45 @@
+﻿@model ST10028058_PROG7312_POE.Models.EventModel
+@{
+    ViewData["Title"] = "Delete Event";
+}
+
+<div class="container mt-4">
+    <h2 class="text-danger mb-3 text-center">🗑 Delete Event</h2>
+
+    <form asp-action="Delete" method="post" class="border p-4 rounded shadow-sm text-center">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Date" />
+
+        <p class="mb-4 text-muted">Are you sure you want to delete the following event?</p>
+
+        <div class="mb-3">
+            <label class="form-label text-success">Title</label>
+            <input asp-for="Title" class="form-control border-success" readonly />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label text-success">Date</label>
+            <input asp-for="Date" class="form-control border-success" readonly />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label text-success">Category</label>
+            <input asp-for="Category" class="form-control border-success" readonly />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label text-success">Location</label>
+            <input asp-for="Location" class="form-control border-success" readonly />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label text-success">Description</label>
+            <textarea asp-for="Description" class="form-control border-success" rows="2" readonly></textarea>
+        </div>
+
+        <div class="text-center mt-3">
+            <button type="submit" class="btn btn-danger me-2">Delete</button>
+            <a asp-action="Index" class="btn btn-outline-success">Cancel</a>
+        </div>
+    </form>
+</div>

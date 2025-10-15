@@ -1,0 +1,109 @@
+﻿@model ST10028058_PROG7312_POE.Models.EventModel
+@{
+    ViewData["Title"] = "Edit Event";
+}
+
+<div class="container mt-4">
+    <h2 class="text-success mb-3 text-center">✏ Edit Event</h2>
+
+    <form asp-action="Edit" method="post" class="border p-4 rounded shadow-sm">
+        <input type="hidden" asp-for="Date" />
+
+        <!-- TITLE -->
+        <div class="mb-3">
+            <label class="form-label text-success">Title</label>
+            <input asp-for="Title" class="form-control border-success" required />
+        </div>
+
+        <!-- CATEGORY DROPDOWN + ADD NEW -->
+        <div class="mb-3">
+            <label class="form-label text-success">Category</label>
+            <div class="input-group">
+                <select asp-for="Category" id="categoryDropdown" class="form-select border-success" required>
+                    <option value="">-- Select a Category --</option>
+                    @foreach (var cat in ViewBag.Categories as HashSet<string>)
+                    {
+                        <option value="@cat" selected="@(Model.Category == cat ? "selected" : null)">
+                            @cat
+                        </option>
+                    }
+                </select>
+                <button type="button" id="addCategoryBtn" class="btn btn-outline-success">+ Add</button>
+            </div>
+        </div>
+
+        <!-- NEW CATEGORY FIELD (hidden initially) -->
+        <div class="mb-3" id="newCategoryContainer" style="display:none;">
+            <label class="form-label text-success">New Category</label>
+            <div class="input-group">
+                <input type="text" id="newCategoryInput" class="form-control border-success" placeholder="Enter new category name" />
+                <button type="button" id="saveCategoryBtn" class="btn btn-success">Save</button>
+                <button type="button" id="cancelCategoryBtn" class="btn btn-outline-danger">Cancel</button>
+            </div>
+        </div>
+
+        <!-- DATE -->
+        <div class="mb-3">
+            <label class="form-label text-success">Date</label>
+            <input asp-for="Date" type="date" class="form-control border-success" required />
+        </div>
+
+        <!-- LOCATION -->
+        <div class="mb-3">
+            <label class="form-label text-success">Location</label>
+            <input asp-for="Location" class="form-control border-success" required />
+        </div>
+
+        <!-- DESCRIPTION -->
+        <div class="mb-3">
+            <label class="form-label text-success">Description</label>
+            <textarea asp-for="Description" class="form-control border-success" rows="3"></textarea>
+        </div>
+
+        <!-- BUTTONS -->
+        <div class="text-center">
+            <button type="submit" class="btn btn-success me-2">Update</button>
+            <a asp-action="Index" class="btn btn-outline-success">Cancel</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script>
+        const addCategoryBtn = document.getElementById('addCategoryBtn');
+        const newCategoryContainer = document.getElementById('newCategoryContainer');
+        const newCategoryInput = document.getElementById('newCategoryInput');
+        const saveCategoryBtn = document.getElementById('saveCategoryBtn');
+        const cancelCategoryBtn = document.getElementById('cancelCategoryBtn');
+        const categoryDropdown = document.getElementById('categoryDropdown');
+
+        // Show the new category input field
+        addCategoryBtn.addEventListener('click', () => {
+            newCategoryContainer.style.display = 'block';
+            newCategoryInput.focus();
+        });
+
+        // Save new category and add to dropdown
+        saveCategoryBtn.addEventListener('click', () => {
+            const newCategory = newCategoryInput.value.trim();
+            if (newCategory) {
+                const option = document.createElement('option');
+                option.value = newCategory;
+                option.textContent = newCategory;
+                option.selected = true;
+                categoryDropdown.appendChild(option);
+
+                newCategoryContainer.style.display = 'none';
+                newCategoryInput.value = '';
+            } else {
+                alert("Please enter a valid category name.");
+            }
+        });
+
+        // Cancel adding new category
+        cancelCategoryBtn.addEventListener('click', () => {
+            newCategoryContainer.style.display = 'none';
+            newCategoryInput.value = '';
+        });
+    </script>
+}

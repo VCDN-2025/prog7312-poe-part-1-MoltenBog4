@@ -1,0 +1,83 @@
+﻿@model List<ST10028058_PROG7312_POE.Models.EventModel>
+@{
+    ViewData["Title"] = "Manage Events";
+}
+
+<div class="container mt-4">
+    <h2 class="text-success text-center mb-4">🗂 Manage Local Events & Announcements</h2>
+
+    <!-- ✅ Alerts for success/error messages -->
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success text-center">@TempData["Success"]</div>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger text-center">@TempData["Error"]</div>
+    }
+
+    <!-- ✅ Top 5 Upcoming Events (Priority Queue) -->
+    @if (ViewBag.UpcomingEvents != null && ((List<ST10028058_PROG7312_POE.Models.EventModel>)ViewBag.UpcomingEvents).Any())
+    {
+        <h4 class="text-success text-center mb-3">🌟 Top 5 Upcoming Events</h4>
+        <div class="row justify-content-center mb-4">
+            @foreach (var ev in ViewBag.UpcomingEvents as List<ST10028058_PROG7312_POE.Models.EventModel>)
+            {
+                <div class="col-md-3 mb-3">
+                    <div class="card border-success shadow-sm h-100">
+                        <div class="card-body text-center">
+                            <h6 class="fw-bold text-success">@ev.Title</h6>
+                            <p class="small text-muted">@ev.Date.ToString("dd MMM yyyy")</p>
+                            <p class="small">@ev.Location</p>
+                            <span class="badge bg-success">@ev.Category</span>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+    <!-- ✅ Add New Event Button -->
+    <div class="mb-3 text-end">
+        <a asp-action="Create" class="btn btn-success">➕ Add New Event</a>
+    </div>
+
+    <!-- ✅ Events Table -->
+    <table class="table table-bordered table-hover align-middle">
+        <thead class="table-success">
+            <tr>
+                <th>Title</th>
+                <th>Date</th>
+                <th>Category</th>
+                <th>Location</th>
+                <th>Description</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (!Model.Any())
+            {
+                <tr>
+                    <td colspan="6" class="text-center text-muted">No events found. Add one above.</td>
+                </tr>
+            }
+            else
+            {
+                @foreach (var ev in Model)
+                {
+                    <tr>
+                        <td>@ev.Title</td>
+                        <td>@ev.Date.ToString("dd MMM yyyy")</td>
+                        <td>@ev.Category</td>
+                        <td>@ev.Location</td>
+                        <td>@ev.Description</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-date="@ev.Date" class="btn btn-sm btn-outline-success me-1">Edit</a>
+                            <a asp-action="Delete" asp-route-date="@ev.Date" class="btn btn-sm btn-outline-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

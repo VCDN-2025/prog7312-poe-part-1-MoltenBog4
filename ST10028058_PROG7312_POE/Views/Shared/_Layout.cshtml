@@ -12,6 +12,7 @@
         return (matchController && matchAction) ? "active" : "";
     }
 }
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,24 +25,64 @@
     <link rel="stylesheet" href="~/ST10028058_PROG7312_POE.styles.css" asp-append-version="true" />
 
     <style>
-        .navbar .nav-link.disabled {
-            opacity: .5;
-            pointer-events: none;
-            cursor: not-allowed;
+        /* === THEME COLORS === */
+        :root {
+            --primary-green: #32CD32;
+            --primary-hover: #28b428;
+            --accent-light: #dfffe0;
         }
 
-        .navbar .nav-link.active {
-            font-weight: 600;
-            text-decoration: underline;
-            text-underline-offset: 4px;
+        /* === NAVBAR === */
+        .navbar {
+            background-color: var(--primary-green) !important;
         }
+
+            .navbar .nav-link {
+                color: white !important;
+                font-weight: 500;
+                transition: all 0.2s ease-in-out;
+            }
+
+                .navbar .nav-link:hover {
+                    color: #fff3cd !important;
+                    text-decoration: underline;
+                }
+
+                .navbar .nav-link.active {
+                    font-weight: 600;
+                    text-decoration: underline;
+                    text-underline-offset: 4px;
+                }
+
+                .navbar .nav-link.disabled {
+                    opacity: .6;
+                    pointer-events: none;
+                }
+
+        .navbar-brand {
+            color: white !important;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        /* === FOOTER === */
+        footer {
+            background-color: #f1f1f1;
+            color: #333;
+        }
+
+        /* === RESPONSIVE === */
+      
+
     </style>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm bg-primary border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom shadow-sm mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ST10028058_PROG7312_POE</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    MunicipalConnect
+                </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#mainNavbar" aria-controls="mainNavbar"
@@ -51,28 +92,44 @@
 
                 <div id="mainNavbar" class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
+                        <!-- Report Issue (Common) -->
                         <li class="nav-item">
                             <a class="nav-link @Active("issues", "create")"
                                asp-controller="Issues" asp-action="Create">Report Issues</a>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link disabled" tabindex="-1" aria-disabled="true" title="Coming soon">
-                                Local Events &amp; Announcements
-                            </a>
-                        </li>
+                        <!-- Citizen Events -->
+                        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Citizen"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link @Active("events", "index")"
+                                   asp-controller="Events" asp-action="Index">Local Events &amp; Announcements</a>
+                            </li>
+                        }
 
+                        <!-- Admin Manage Events -->
+                        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link @Active("adminevents", "index")"
+                                   asp-controller="AdminEvents" asp-action="Index">Manage Events</a>
+                            </li>
+                        }
+
+                        <!-- Service Request Placeholder -->
                         <li class="nav-item">
                             <a class="nav-link disabled" tabindex="-1" aria-disabled="true" title="Coming soon">
                                 Service Request Status
                             </a>
                         </li>
 
+                        <!-- All Reports -->
                         <li class="nav-item ms-sm-3">
                             <a class="nav-link @Active("issues", "index")"
                                asp-controller="Issues" asp-action="Index">All Reports</a>
                         </li>
 
+                        <!-- Citizen Feedback -->
                         @if (SignInManager.IsSignedIn(User) && User.IsInRole("Citizen"))
                         {
                             <li class="nav-item ms-sm-3">
@@ -80,6 +137,8 @@
                                    asp-controller="Feedback" asp-action="MyHistory">My Feedback</a>
                             </li>
                         }
+
+                        <!-- Admin Management Links -->
                         @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                         {
                             <li class="nav-item ms-sm-3">
@@ -93,11 +152,12 @@
                         }
                     </ul>
 
+                    <!-- Right Side: User Info / Login -->
                     <ul class="navbar-nav">
                         @if (SignInManager.IsSignedIn(User))
                         {
                             <li class="nav-item d-flex align-items-center me-2">
-                                <span class="navbar-text text-muted">
+                                <span class="navbar-text text-white">
                                     Hello, @User.Identity?.Name
                                     @if (User.IsInRole("Admin"))
                                     {
@@ -105,26 +165,25 @@
                                     }
                                     else if (User.IsInRole("Citizen"))
                                     {
-
-                                        <span class="badge bg-info ms-1">Citizen</span>
+                                        <span class="badge bg-info text-dark ms-1">Citizen</span>
                                     }
                                 </span>
                             </li>
                             <li class="nav-item">
                                 <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
                                     @Html.AntiForgeryToken()
-                                    <button class="nav-link btn btn-link" type="submit">Logout</button>
+                                    <button class="nav-link btn btn-link text-white" type="submit">Logout</button>
                                 </form>
                             </li>
                         }
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link @Active("account", "login")"
+                                <a class="nav-link text-white @Active("account", "login")"
                                    asp-controller="Account" asp-action="Login">Login</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link @Active("account", "register")"
+                                <a class="nav-link text-white @Active("account", "register")"
                                    asp-controller="Account" asp-action="Register">Register</a>
                             </li>
                         }
@@ -134,16 +193,18 @@
         </nav>
     </header>
 
+    <!-- MAIN CONTENT -->
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - ST10028058_PROG7312_POE -
-            <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <!-- FOOTER -->
+    <footer class="border-top footer text-muted py-3">
+        <div class="container text-center">
+            &copy; 2025 - MunicipalConnect by ST10028058_PROG7312_POE •
+            <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-success">Privacy</a>
         </div>
     </footer>
 
