@@ -34,17 +34,17 @@
 
         /* === NAVBAR === */
         .navbar {
-            background-color: var(--primary-green) !important;
+            background-color: var(--primary-green) !important; /* Green background */
         }
 
             .navbar .nav-link {
-                color: white !important;
+                color: #212529 !important; /* Dark text */
                 font-weight: 500;
                 transition: all 0.2s ease-in-out;
             }
 
                 .navbar .nav-link:hover {
-                    color: #fff3cd !important;
+                    color: #000 !important; /* Darker hover */
                     text-decoration: underline;
                 }
 
@@ -57,12 +57,23 @@
                 .navbar .nav-link.disabled {
                     opacity: .6;
                     pointer-events: none;
+                    color: #495057 !important; /* subtle gray */
                 }
 
         .navbar-brand {
-            color: white !important;
+            color: #212529 !important; /* Dark brand text */
             font-weight: 700;
             letter-spacing: 0.5px;
+        }
+
+        /* Right-side user info + buttons */
+        .navbar-text,
+        .nav-link.btn {
+            color: #212529 !important; /* Dark user info and logout/login */
+        }
+
+        form .btn-link {
+            color: #212529 !important;
         }
 
         /* === FOOTER === */
@@ -70,10 +81,6 @@
             background-color: #f1f1f1;
             color: #333;
         }
-
-        /* === RESPONSIVE === */
-      
-
     </style>
 </head>
 <body>
@@ -157,7 +164,7 @@
                         @if (SignInManager.IsSignedIn(User))
                         {
                             <li class="nav-item d-flex align-items-center me-2">
-                                <span class="navbar-text text-white">
+                                <span class="navbar-text">
                                     Hello, @User.Identity?.Name
                                     @if (User.IsInRole("Admin"))
                                     {
@@ -172,18 +179,18 @@
                             <li class="nav-item">
                                 <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
                                     @Html.AntiForgeryToken()
-                                    <button class="nav-link btn btn-link text-white" type="submit">Logout</button>
+                                    <button class="nav-link btn btn-link" type="submit">Logout</button>
                                 </form>
                             </li>
                         }
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-white @Active("account", "login")"
+                                <a class="nav-link @Active("account", "login")"
                                    asp-controller="Account" asp-action="Login">Login</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white @Active("account", "register")"
+                                <a class="nav-link @Active("account", "register")"
                                    asp-controller="Account" asp-action="Register">Register</a>
                             </li>
                         }
