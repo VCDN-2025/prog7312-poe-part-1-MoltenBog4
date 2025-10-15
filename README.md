@@ -48,8 +48,8 @@ The system was developed across **two phases**:
 - Expanded **Admin Dashboard** with CRUD and Undo operations.  
 
 > 🎥 **Video Links:**  
-> 🎬 [Part 1 Demonstration](#)  
-> 🎬 [Part 2 Demonstration](#)  
+> 🎬 [Part 1 Demonstration](https://youtu.be/ONAEioCP_Fk?si=VoWY-YuPxNWK0nYK)  
+> 🎬 [Part 2 Demonstration]()  
 
 ---
 
