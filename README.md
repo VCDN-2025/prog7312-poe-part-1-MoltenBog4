@@ -1,148 +1,163 @@
-🏙️ Municipal Services Application – Part 1
+# 🏙️ Municipal Services Application – PROG7312 Portfolio of Evidence
 
+**Module:** PROG7312 – Advanced Application Development  
+**Assessment:** Portfolio of Evidence (PoE) – Part 1
+**Author:** Sashiel Moonsamy  
+**Student Number:** ST10028058  
 
+👉 [**Watch Demo Video on YouTube**](https://youtu.be/ONAEioCP_Fk)
+https://youtu.be/ONAEioCP_Fk
 
+---
 
+## 📖 Overview
 
+The **Municipal Services Application** is a C# **ASP.NET Core MVC web application** developed as part of the PROG7312 PoE.  
+It provides a **digital platform** for South African citizens to report municipal issues, track progress, and strengthen transparency between residents and local municipalities.
 
-Module: PROG7312 – Advanced Application Development
-Assessment: Portfolio of Evidence (PoE) – Part 1
+The application incorporates:
+- **Citizen functionality** (report issues, leave ratings and feedback, view personal reports and feedback history)  
+- **Administrator functionality** (view all reported issues, see all citizen feedback, respond to feedback, filter reports)  
+- **Custom-built data structures** for storage (no generic collections such as `List<T>` are used)  
 
-📖 Overview
+The system contributes to improved communication, accountability, and citizen engagement.
 
-The Municipal Services Application is a C# .NET Framework Windows Forms project designed to improve municipal service delivery and citizen engagement in South Africa.
+---
 
-Part 1 focuses on the Report Issues functionality, which enables citizens to:
-✔️ Log service delivery issues (e.g., sanitation, roads, water outages)
-✔️ Provide location, category, and detailed descriptions
-✔️ Attach supporting media (images/documents)
-✔️ Receive feedback through a Feedback & Rating System
+## ✨ Features
 
-⚙️ Requirements
+### Citizens
+- Submit new **service issue reports** (e.g., potholes, outages, sanitation).  
+- Attach optional images or documents as evidence.  
+- View only **their own issues** in a personal dashboard.  
+- Provide **ratings and written feedback** on the municipality’s response.  
+- Access a **feedback history** page.  
 
-To compile and run the application, ensure the following are installed:
+### Administrators
+- Log in with Admin credentials.  
+- View **all reported issues** across all users.  
+- View **all feedback and ratings** across all issues.  
+- **Respond** to citizen feedback and track response times.  
+- Filter and monitor service delivery performance by category.  
 
-Visual Studio 2022 or later
+---
 
-.NET Framework 4.7.2 or higher
+## 🛠️ Technology Stack
 
-Windows OS
+- **ASP.NET Core 8.0 MVC**  
+- **Entity Framework Core (Identity for roles & login)**  
+- **SQL Server / SSMS** for authentication & persistence  
+- **Bootstrap (Bootswatch Brite theme)** for styling  
+- **Custom Data Structures**: `SinglyLinkedList<T>` used for storing issues and feedback  
 
-🚀 Setup Instructions
-# 1. Clone the repository
-git clone https://github.com/VCDN-2025/prog7312-poe-part-1-MoltenBog4.git
+---
 
-# 2. Open in Visual Studio
-File → Open → Project/Solution → Select .sln file
+## 🚀 Getting Started
 
-# 3. Build the solution
-Build → Build Solution
+### ✅ Prerequisites
+- Visual Studio 2022 (with ASP.NET and web development workload)  
+- .NET 8.0 SDK  
+- SQL Server Management Studio (SSMS) for database access  
 
-# 4. Run the application
-Press F5 or Start Debugging
+---
 
-🖥️ Application Usage
-📌 Main Menu
+### 📂 Clone the Repository
+```bash
+git clone https://github.com/<YourUsername>/<YourRepo>.git
+cd ST10028058_PROG7312_POE
 
-✅ Report Issues (active for Part 1)
+⚙️ Setup Instructions
 
-🚧 Local Events & Announcements (coming in Part 2)
+Open the solution in Visual Studio:
+ST10028058_PROG7312_POE.sln
 
-🚧 Service Request Status (coming in Part 3)
+Restore NuGet packages (Visual Studio should do this automatically).
 
-📝 Report Issues Page
+Database setup:
 
-📍 Location Input – Enter where the issue occurred
+Update appsettings.json with your SQL Server connection string:
 
-🗂️ Category Selection – Choose issue type
+"ConnectionStrings": {
+  "DefaultConnection": "Server=(localdb)\\MSSQLLocalDB;Database=MunicipalServicesDb;Trusted_Connection=True;MultipleActiveResultSets=true"
+}
 
-📝 Description Box – Detailed information
 
-📎 Media Attachment – Upload files/images
+Run the following in Package Manager Console:
 
-✅ Submit Button – Save and confirm
+Update-Database
 
-🔔 Feedback Message – Thank-you alert
 
-🔙 Back – Return to Main Menu
+Seed data: The system automatically seeds roles and users on first run:
 
-📂 Data Handling
+Admin → admin@city.gov / Admin123!
 
-Uses a List data structure to store issues.
+Citizen 1 → user@demo.com / Citizen123!
 
-Each report contains:
+Citizen 2 → second@demo.com / Citizen456!
 
-Location
+▶️ Run the Application
 
-Category
+Press F5 in Visual Studio, or run:
 
-Description
+dotnet run
 
-Attachment path
 
-🎨 Design Principles
+👥 Usage
+For Citizens
 
-🎯 Consistency → Uniform colour scheme & layout
+Login with a citizen account.
 
-🧾 Clarity → Simple, descriptive labels & buttons
+Click Report Issues to submit a new issue.
 
-💬 User Feedback → Success/error alerts
+View your own reports under My Reports.
 
-🖥️ Responsiveness → Adjusts to screen sizes
+After submitting, provide a rating/feedback.
 
-🔑 Role-Based Feedback Management
-👤 Citizens (Users)
+Check past submissions under My Feedback.
 
-Submit service requests
+For Admins
 
-Rate responses ⭐⭐⭐⭐⭐
+Login with the Admin account.
 
-Leave comments
+Navigate to All Issues to see every report.
 
-View personal feedback history
+Navigate to All Feedback to review all citizen feedback.
 
-🛠️ Administrators (Municipality Staff)
-
-View all feedback linked to reports
-
-Filter by department, service type, or response time
-
-Respond to citizen comments
-
-View analytics dashboards 📊
-
-🔐 Login Integration
-
-Feedback tied to authenticated accounts
-
-Users only see their own data
-
-Admins have full visibility
-
-🔮 Future Development
-
-Part 2 → Local Events & Announcements
-
-Part 3 → Service Request Status (trees, graphs, heaps)
-
-Enhancements → Dashboards, gamification, community engagement
-
-👨‍💻 Author
-
-Student Name: [Your Full Name]
-
-Student Number: [Your Student ID]
-
-Institution: IIE Varsity College
-
-📚 References
-
-Microsoft, 2023. C# documentation. Docs
-
-Microsoft, 2023. .NET Framework documentation. Docs
-
-Microsoft, 2023. Windows Forms documentation. Docs
+Use the Respond option to provide an official reply.
 
 🎥 Demo Video
 
-▶️ Watch the demo on YouTube:https://youtu.be/ONAEioCP_Fk 
+A full walkthrough of the system (citizen & admin features, reporting, feedback, and responses) is available here:
+
+👉 Watch Demo Video on YouTube:https://youtu.be/ONAEioCP_Fk
+
+
+📜 Academic Notes
+
+Developed for PROG7312 Advanced Application Development.
+
+Implements user engagement strategies such as:
+
+Ratings & feedback for improved transparency.
+
+Demonstrates role-based access (Citizen vs Admin).
+
+Uses custom data structures instead of built-in collections.
+
+📚 References
+
+Microsoft Docs – ASP.NET Core MVC
+
+Microsoft Docs – ASP.NET Core Identity
+
+Bootswatch – Brite Theme
+
+PROG7312 PoE Specification Document (2025)
+
+Gido, Clements & Baker – Successful Project Management, 7th Edition
+
+👨‍💻 Author
+
+Name: Sashiel Moonsamy
+
+Student Number: ST10028058
