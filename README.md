@@ -49,7 +49,7 @@ The system was developed across **two phases**:
 
 > 🎥 **Video Links:**  
 > 🎬 [Part 1 Demonstration](https://youtu.be/ONAEioCP_Fk?si=VoWY-YuPxNWK0nYK)  
-> 🎬 [Part 2 Demonstration]()  
+> 🎬 [Part 2 Demonstration](https://youtu.be/Zlaezj9AP3M)  
 
 ---
 
