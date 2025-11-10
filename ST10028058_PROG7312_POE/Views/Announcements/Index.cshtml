@@ -3,108 +3,201 @@
     ViewData["Title"] = "City Announcements";
 }
 
-<div class="container mt-4">
-    <h2 class="text-center mb-4">📢 City Announcements</h2>
+<div class="container mt-5 mb-5">
+    <h2 class="text-center fw-bold mb-4" style="color:#111;">📢 City Announcements</h2>
 
-    <!-- Search and Sort Controls -->
-    <form method="get" class="row mb-4 justify-content-center bg-light p-3 rounded shadow-sm">
-        <div class="col-md-4 mb-2">
-            <input type="text" name="search" value="@ViewBag.Search" class="form-control"
-                   placeholder="Search announcements..." />
-        </div>
-        <div class="col-md-3 mb-2">
-            <select name="sortOption" class="form-select" onchange="this.form.submit()">
-                <option value="">Sort by: Date (Newest)</option>
+    <!-- Search + Filters -->
+    <form method="get" class="p-4 rounded-4 shadow-sm mb-4" style="background:#f8f9fa;">
+        <div class="row g-3 align-items-center justify-content-center">
+            <!-- Search -->
+            <div class="col-md-4">
+                <input type="text" name="search" value="@ViewBag.Search"
+                       class="form-control form-control-lg shadow-sm"
+                       placeholder="🔍 Search announcements..." />
+            </div>
 
-                @if (ViewBag.SortOption == "title")
-                {
-                    <option value="title" selected>Title (A–Z)</option>
-                }
-                else
-                {
-                    <option value="title">Title (A–Z)</option>
-                }
+            <!-- Sort Option -->
+            <div class="col-md-3">
+                <select name="sortOption" class="form-select form-select-lg shadow-sm">
+                    <option value="">Sort by: Date (Newest)</option>
 
-                @if (ViewBag.SortOption == "author")
-                {
-                    <option value="author" selected>Author (A–Z)</option>
-                }
-                else
-                {
-                    <option value="author">Author (A–Z)</option>
-                }
-            </select>
-        </div>
-        <div class="col-md-2 mb-2">
-            <button type="submit" class="btn btn-success w-100">Apply</button>
+                    @if (ViewBag.SortOption == "oldest")
+                    {
+                        <option value="oldest" selected>Date (Oldest)</option>
+                    }
+                    else
+                    {
+                        <option value="oldest">Date (Oldest)</option>
+                    }
+
+                    @if (ViewBag.SortOption == "title")
+                    {
+                        <option value="title" selected>Title (A–Z)</option>
+                    }
+                    else
+                    {
+                        <option value="title">Title (A–Z)</option>
+                    }
+
+                    @if (ViewBag.SortOption == "author")
+                    {
+                        <option value="author" selected>Author (A–Z)</option>
+                    }
+                    else
+                    {
+                        <option value="author">Author (A–Z)</option>
+                    }
+                </select>
+            </div>
+
+            <!-- Department Filter -->
+            <div class="col-md-3">
+                <select name="department" class="form-select form-select-lg shadow-sm">
+                    <option value="">All Departments</option>
+                    <option value="Community Development Office">Community Development Office</option>
+                    <option value="Health Department">Health Department</option>
+                    <option value="Education & Culture">Education & Culture</option>
+                    <option value="Water Department">Water Department</option>
+                    <option value="Transport Authority">Transport Authority</option>
+                    <option value="Energy Management Office">Energy Management Office</option>
+                </select>
+            </div>
+
+            <!-- Apply + Reset Buttons -->
+            <div class="col-md-2 text-center">
+                <button type="submit" class="btn btn-success w-100 fw-bold btn-animate">Apply</button>
+            </div>
+            <div class="col-md-2 text-center">
+                <a href="@Url.Action("Index", "Announcements")"
+                   class="btn btn-outline-secondary w-100 fw-bold btn-animate">Reset</a>
+            </div>
         </div>
     </form>
 
     @if (!Model.Any())
     {
-        <div class="alert alert-info text-center">
-            No announcements found.
+        <div class="alert alert-info text-center fw-semibold shadow-sm mt-4">
+            No announcements found. Try adjusting filters.
         </div>
     }
     else
     {
-        <div class="row">
+        <div class="row g-4">
             @foreach (var announcement in Model)
             {
-                <div class="col-md-6 mb-4">
-                    <div class="card shadow-sm h-100 border-0">
+                <div class="col-md-6">
+                    <div class="card announcement-card border-0 shadow-sm h-100">
                         <div class="card-body">
-                            <h5 class="card-title">@announcement.Title</h5>
-                            <p class="text-muted mb-2">
-                                Posted on @announcement.Date.ToString("MMMM dd, yyyy") by
-                                <strong>@announcement.Author</strong>
+                            <h5 class="fw-bold" style="color:#000;">@announcement.Title</h5>
+                            <p class="text-muted mb-2 small">
+                                📅 @announcement.Date.ToString("MMMM dd, yyyy")
+                                &nbsp; | &nbsp; 🏢 <strong>@announcement.Author</strong>
                             </p>
-                            <p class="card-text text-truncate" style="max-height: 4rem;">
-                                @announcement.Message
-                            </p>
-                            <a href="@Url.Action("ViewAnnouncement", new { date = announcement.Date })"
-                               class="btn btn-outline-success btn-sm">Read More</a>
-                        </div>
-                    </div>
+                            <p class="card-text text-secondary" style="font-size:0.95rem;">
+                                @(announcement.Message.Length > 120
+                                                        ? announcement.Message.Substring(0, 120) + "..."
+                                                        : announcement.Message)
+                    </p>
+                    <a href="@Url.Action("ViewAnnouncement", new { date = announcement.Date })"
+                       class="btn btn-readmore btn-sm mt-2 btn-animate text-white">Read More</a>
                 </div>
-            }
+            </div>
+        </div>
+                }
         </div>
     }
 </div>
 
+<!-- Inline Styling -->
 <style>
-    /* === MunicipalConnect Styling Consistency === */
-    :root {
-        --primary-green: #32CD32;
-        --primary-hover: #28b428;
+ 
+
+    /* Form Inputs */
+    .form-select, .form-control {
+        border-radius: 10px;
+        border: 1.5px solid #dee2e6;
+        transition: all 0.2s ease-in-out;
     }
 
+        .form-select:focus, .form-control:focus {
+            border-color: var(--primary-green);
+           
+        }
+
+    /* Apply Button */
     .btn-success {
-        background-color: var(--primary-green);
-        border-color: var(--primary-green);
+        background: var(--primary-green);
+        border: none;
+        transition: transform 0.08s ease-in-out, box-shadow 0.1s;
+        color: #fff;
     }
 
         .btn-success:hover {
-            background-color: var(--primary-hover);
-            border-color: var(--primary-hover);
+            background: var(--primary-hover);
+            transform: scale(1.02);
+            
         }
 
+    /* Outline Success */
     .btn-outline-success {
-        color: var(--primary-green);
-        border-color: var(--primary-green);
+        color: var(--primary-hover);
+        border-color: var(--primary-hover);
     }
 
         .btn-outline-success:hover {
-            background-color: var(--primary-green);
-            color: white;
+            background: var(--primary-hover);
+            color: #fff;
+            transform: scale(1.03);
         }
 
-    .form-select, .form-control {
-        border-radius: 8px;
+    /* Reset Button */
+    .btn-outline-secondary {
+        border-color: red;
+        color: darkred;
+        transition: all 0.2s ease-in-out;
     }
 
-    h2 {
-        color: #1b1b1b;
-        font-weight: 700;
+        .btn-outline-secondary:hover {
+            background-color: red;
+            color: #fff;
+            transform: scale(1.03);
+        }
+
+    /* Read More Button */
+    .btn-readmore {
+        background: var(--primary-green);
+        border: 1.5px solid var(--primary-green);
+        color: #fff !important;
+        font-weight: 600;
+        border-radius: 8px;
+        transition: all 0.25s ease-in-out;
+        padding: 6px 14px;
     }
+
+        .btn-readmore:hover {
+            background: var(--primary-hover);
+            border-color: var(--primary-hover);
+            color: #fff !important;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(39,174,96,0.25);
+        }
+
+    /* Button Vibration Animation */
+    .btn-animate:active {
+        animation: vibrate 0.1s linear 2;
+    }
+
+  
+
+    /* Cards */
+    .announcement-card {
+        border-radius: 12px;
+        transition: all 0.2s ease-in-out;
+    }
+
+        .announcement-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--card-shadow);
+            background: #fefefe;
+        }
 </style>

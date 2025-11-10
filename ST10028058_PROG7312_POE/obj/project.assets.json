@@ -4196,11 +4196,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Sashiel\\Source\\Repos\\prog7312-poe-part-1-MoltenBog4\\ST10028058_PROG7312_POE\\ST10028058_PROG7312_POE.csproj",
+      "projectUniqueName": "C:\\Users\\Sashiel\\Documents\\2025 Semester 2\\PROG7312\\prog7312-poe-part-1-MoltenBog4\\ST10028058_PROG7312_POE\\ST10028058_PROG7312_POE.csproj",
       "projectName": "ST10028058_PROG7312_POE",
-      "projectPath": "C:\\Users\\Sashiel\\Source\\Repos\\prog7312-poe-part-1-MoltenBog4\\ST10028058_PROG7312_POE\\ST10028058_PROG7312_POE.csproj",
+      "projectPath": "C:\\Users\\Sashiel\\Documents\\2025 Semester 2\\PROG7312\\prog7312-poe-part-1-MoltenBog4\\ST10028058_PROG7312_POE\\ST10028058_PROG7312_POE.csproj",
       "packagesPath": "C:\\Users\\Sashiel\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Sashiel\\Source\\Repos\\prog7312-poe-part-1-MoltenBog4\\ST10028058_PROG7312_POE\\obj\\",
+      "outputPath": "C:\\Users\\Sashiel\\Documents\\2025 Semester 2\\PROG7312\\prog7312-poe-part-1-MoltenBog4\\ST10028058_PROG7312_POE\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

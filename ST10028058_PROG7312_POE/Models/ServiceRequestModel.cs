@@ -38,12 +38,16 @@ namespace ST10028058_PROG7312_POE.Models
 
         // ===== System-Determined Fields =====
         [Display(Name = "Priority Level")]
-        [Range(1, 5, ErrorMessage = "Priority must be between 1 (High) and 5 (Low).")]
+        [Range(1, 5, ErrorMessage = "Priority must be between 1 (Critical = 1) and 5 (Low = 5).")]
         public int Priority { get; set; } = 5;
 
         [Display(Name = "Date Submitted")]
         [DataType(DataType.DateTime)]
         public DateTime DateSubmitted { get; set; } = DateTime.UtcNow;
+
+        [Display(Name = "Last Updated")]
+        [DataType(DataType.DateTime)]
+        public DateTime LastUpdated { get; set; } = DateTime.UtcNow;
 
         [Display(Name = "Status")]
         public RequestStatus Status { get; set; } = RequestStatus.Pending;
@@ -51,5 +55,27 @@ namespace ST10028058_PROG7312_POE.Models
         // ===== Optional File Attachment =====
         [Display(Name = "Attached File (optional)")]
         public string? AttachedFilePath { get; set; }
+
+        // ===== Derived / Helper Properties =====
+        [Display(Name = "Priority Label")]
+        public string PriorityLabel
+        {
+            get
+            {
+                return Priority switch
+                {
+                    1 => "Critical",
+                    2 => "High",
+                    3 => "Medium",
+                    4 => "Low",
+                    5 => "Very Low",
+                    _ => "Unspecified"
+                };
+            }
+        }
+
+        // ===== Computed Property for Display =====
+        [Display(Name = "Summary")]
+        public string Summary => $"{Title} — {Category} in {Area} ({PriorityLabel})";
     }
 }

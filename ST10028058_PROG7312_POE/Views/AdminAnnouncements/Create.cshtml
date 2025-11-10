@@ -1,32 +1,124 @@
 ﻿@model ST10028058_PROG7312_POE.Models.AnnouncementModel
 
-<div class="container mt-4">
-    <h2 class="text-center mb-4">🆕 Create Announcement</h2>
+<div class="container mt-5 mb-5">
+    <!-- Page Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold text-dark mb-0">🆕 Create Announcement</h2>
+        <a href="@Url.Action("Index")" class="btn btn-outline-danger fw-bold px-4">
+            <i class="bi bi-x-circle me-2"></i>Cancel
+        </a>
+    </div>
 
-    <form asp-action="Create" method="post">
-        <div class="mb-3">
-            <label asp-for="Title" class="form-label"></label>
-            <input asp-for="Title" class="form-control" />
-            <span asp-validation-for="Title" class="text-danger"></span>
+    <!-- Form Card -->
+    <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+        <div class="card-header text-white py-4" style="background: linear-gradient(90deg, #28a745, #20c997);">
+            <h4 class="fw-bold mb-0"><i class="bi bi-megaphone-fill me-2"></i>Announcement Details</h4>
         </div>
 
-        <div class="mb-3">
-            <label asp-for="Message" class="form-label"></label>
-            <textarea asp-for="Message" class="form-control" rows="4"></textarea>
-            <span asp-validation-for="Message" class="text-danger"></span>
-        </div>
+        <div class="card-body bg-light p-4">
+            <form asp-action="Create" method="post">
+                <!-- Title -->
+                <div class="mb-3">
+                    <label asp-for="Title" class="form-label fw-semibold text-dark">
+                        <i class="bi bi-pencil-square me-2 text-success"></i>Title
+                    </label>
+                    <input asp-for="Title" class="form-control form-control-lg rounded-3 shadow-sm" placeholder="Enter announcement title" />
+                    <span asp-validation-for="Title" class="text-danger small"></span>
+                </div>
 
-        <div class="mb-3">
-            <label asp-for="Date" class="form-label"></label>
-            <input asp-for="Date" type="date" class="form-control" />
-        </div>
+                <!-- Message -->
+                <div class="mb-3">
+                    <label asp-for="Message" class="form-label fw-semibold text-dark">
+                        <i class="bi bi-chat-left-text me-2 text-success"></i>Message
+                    </label>
+                    <textarea asp-for="Message" class="form-control form-control-lg rounded-3 shadow-sm" rows="5" placeholder="Write your message..."></textarea>
+                    <span asp-validation-for="Message" class="text-danger small"></span>
+                </div>
 
-        <div class="mb-3">
-            <label asp-for="Author" class="form-label"></label>
-            <input asp-for="Author" class="form-control" />
-        </div>
+                <!-- Date -->
+                <div class="mb-3">
+                    <label asp-for="Date" class="form-label fw-semibold text-dark">
+                        <i class="bi bi-calendar-event me-2 text-success"></i>Date
+                    </label>
+                    <input asp-for="Date" type="date" class="form-control form-control-lg rounded-3 shadow-sm" />
+                    <span asp-validation-for="Date" class="text-danger small"></span>
+                </div>
 
-        <button type="submit" class="btn btn-success">Save</button>
-        <a href="@Url.Action("Index")" class="btn btn-secondary">Cancel</a>
-    </form>
+                <!-- Author -->
+                <div class="mb-4">
+                    <label asp-for="Author" class="form-label fw-semibold text-dark">
+                        <i class="bi bi-person-circle me-2 text-success"></i>Author
+                    </label>
+                    <input asp-for="Author" class="form-control form-control-lg rounded-3 shadow-sm" placeholder="Enter author name" />
+                    <span asp-validation-for="Author" class="text-danger small"></span>
+                </div>
+
+                <!-- Buttons -->
+                <div class="d-flex justify-content-end gap-2 mt-4">
+                    <button type="submit" class="btn btn-gradient px-4 py-2 fw-bold text-white">
+                        <i class="bi bi-check-circle me-2"></i>Save Announcement
+                    </button>
+                    <a href="@Url.Action("Index")" class="btn btn-outline-secondary px-4 py-2 fw-bold">
+                        <i class="bi bi-arrow-left me-2"></i>Back
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<!-- Custom Styling -->
+<style>
+    /* Gradient buttons */
+    .btn-gradient {
+        background: linear-gradient(90deg, #28a745, #20c997);
+        border: none;
+        transition: all 0.2s ease-in-out;
+    }
+
+        .btn-gradient:hover {
+            transform: translateY(-1px);
+            background: linear-gradient(90deg, #218838, #17a589);
+        }
+
+    /* Form Controls */
+    .form-control, .form-select {
+        border: 1px solid #ccc;
+        transition: all 0.2s ease-in-out;
+    }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #28a745;
+            box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+        }
+
+    /* Card */
+    .card {
+        background-color: #fff;
+        transition: all 0.2s ease;
+    }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        }
+
+    /* Labels and Icons */
+    label i {
+        opacity: 0.9;
+    }
+
+    /* Date picker */
+    input[type="date"]::-webkit-calendar-picker-indicator {
+        filter: invert(35%) sepia(100%) saturate(250%) hue-rotate(90deg);
+    }
+
+    /* Spacing consistency */
+    .container {
+        max-width: 850px;
+    }
+</style>

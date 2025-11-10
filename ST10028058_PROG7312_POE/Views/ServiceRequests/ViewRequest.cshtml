@@ -1,19 +1,157 @@
 ﻿@model ST10028058_PROG7312_POE.Models.ServiceRequestModel
 @{
     ViewData["Title"] = "View Request";
+
+    // Map status and priority to consistent badge classes
+    string statusClass = Model.Status.ToString() switch
+    {
+        "Pending" => "status-pending",
+        "InProgress" => "status-inprogress",
+        "Completed" => "status-completed",
+        "Cancelled" => "status-cancelled",
+        _ => "status-default"
+    };
+
+    string priorityClass = Model.Priority.ToString() switch
+    {
+        "Critical" => "priority-critical",
+        "High" => "priority-high",
+        "Medium" => "priority-medium",
+        "Low" => "priority-low",
+        _ => "priority-default"
+    };
 }
 
-<div class="container mt-4">
-    <div class="card">
-        <div class="card-body">
-            <h3>@Model.Title <small class="text-muted">(#@Model.RequestId)</small></h3>
-            <p class="text-muted">@Model.Category • @Model.Area</p>
-            <p class="mb-3">@Model.Description</p>
-            <p><strong>Status:</strong> <span class="badge bg-secondary">@Model.Status</span></p>
-            <p><strong>Priority:</strong> @Model.Priority</p>
-            <p class="small text-muted">Submitted: @Model.DateSubmitted.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</p>
+<div class="container mt-5 mb-5">
+    <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+        <!-- Header -->
+        <div class="card-header text-white py-4" style="background: linear-gradient(90deg, #28a745, #20c997);">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h3 class="fw-bold mb-0">@Model.Title</h3>
+                    <p class="mb-0 small opacity-75">Request ID: #@Model.RequestId</p>
+                </div>
+                <span class="badge @statusClass fs-6 px-3 py-2">@Model.Status</span>
+            </div>
+        </div>
 
-            <a class="btn btn-outline-primary" asp-action="Index">Back to List</a>
+        <!-- Body -->
+        <div class="card-body p-4">
+            <div class="row">
+                <!-- Left Section -->
+                <div class="col-md-8">
+                    <h5 class="fw-semibold text-dark mb-3"><i class="bi bi-info-circle me-2 text-success"></i>Request Details</h5>
+                    <p class="text-muted">@Model.Description</p>
+                </div>
+
+                <!-- Right Section -->
+                <div class="col-md-4">
+                    <div class="border-start ps-3">
+                        <h6 class="fw-semibold text-dark mb-3"><i class="bi bi-list-task me-2 text-success"></i>Summary</h6>
+                        <p class="mb-2"><strong>Category:</strong> <span class="text-muted">@Model.Category</span></p>
+                        <p class="mb-2"><strong>Area:</strong> <span class="text-muted">@Model.Area</span></p>
+                        <p class="mb-2">
+                            <strong>Priority:</strong>
+                            <span class="badge @priorityClass px-2 py-1">@Model.Priority</span>
+                        </p>
+                        <p class="mb-0">
+                            <strong>Submitted:</strong>
+                            <span class="text-muted">@Model.DateSubmitted.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="card-footer bg-light text-end py-3">
+            <a asp-action="Index" class="btn btn-outline-secondary fw-semibold px-4">
+                <i class="bi bi-arrow-left me-1"></i> Back to List
+            </a>
         </div>
     </div>
 </div>
+
+<!-- Matching Styles -->
+<style>
+    /* Gradient Buttons */
+    .btn-gradient {
+        background: linear-gradient(90deg, #28a745, #20c997);
+        border: none;
+        color: white;
+        font-weight: 600;
+        transition: all 0.2s ease;
+    }
+
+        .btn-gradient:hover {
+            transform: translateY(-1px);
+            background: linear-gradient(90deg, #218838, #17a589);
+        }
+
+    /* Card Hover */
+    .card {
+        background-color: #fff;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+    /* Status Badges - Match List Page */
+    .status-pending {
+        background-color: #ffcd39;
+        color: #000;
+        font-weight: 600;
+    }
+
+    .status-inprogress {
+        background-color: #17a2b8;
+        color: #fff;
+        font-weight: 600;
+    }
+
+    .status-completed {
+        background-color: #28a745;
+        color: #fff;
+        font-weight: 600;
+    }
+
+    .status-cancelled {
+        background-color: #dc3545;
+        color: #fff;
+        font-weight: 600;
+    }
+
+    /* Priority Badges */
+    .priority-critical {
+        background-color: #dc3545 !important;
+        color: #fff !important;
+    }
+
+    .priority-high {
+        background-color: #fd7e14 !important;
+        color: #fff !important;
+    }
+
+    .priority-medium {
+        background-color: #ffc107 !important;
+        color: #000 !important;
+    }
+
+    .priority-low {
+        background-color: #6c757d !important;
+        color: #fff !important;
+    }
+
+    /* Typography */
+    .card-header h3 {
+        font-size: 1.6rem;
+    }
+
+    .badge {
+        border-radius: 10px;
+        font-weight: 600;
+    }
+</style>

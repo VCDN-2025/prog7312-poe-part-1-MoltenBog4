@@ -71,7 +71,7 @@ wwwroot\uploads\c0c68c12-ce2c-4572-b7c7-c57ff8164251.pdf
 wwwroot\uploads\c8db520c-2ab7-4838-8bb1-a3f237b306a7.pdf
 wwwroot\uploads\ccbadfa9-1a72-4e80-a4e6-09ad7c551347.pdf
 wwwroot\uploads\dc19837b-2d72-4ccf-ba7a-d9d7d9bc38d8.pdf
+wwwroot\uploads\e99cd3cd-80e4-47d5-81a1-bb1b4592274d.jpg
 wwwroot\uploads\edfc2be1-bdd6-4a59-a2ba-3a6aa96922af.jpg
 wwwroot\uploads\f4b9eddd-6d09-494c-bb4a-568375857928.pdf
 wwwroot\uploads\fd13b555-f9c1-4a1e-b44c-372321d08a3a.pdf
-wwwroot\uploads\e99cd3cd-80e4-47d5-81a1-bb1b4592274d.jpg

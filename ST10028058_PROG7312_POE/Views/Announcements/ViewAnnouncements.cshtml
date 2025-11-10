@@ -1,19 +1,98 @@
 ﻿@model ST10028058_PROG7312_POE.Models.AnnouncementModel
 @{
-    ViewData["Title"] = Model.Title;
+    ViewData["Title"] = "View Announcement";
 }
 
-<div class="container mt-5">
-    <div class="card shadow-lg border-0 rounded-4">
-        <div class="card-body">
-            <h2>@Model.Title</h2>
-            <p class="text-muted mb-3">
-                Posted on @Model.Date.ToString("MMMM dd, yyyy") by <strong>@Model.Author</strong>
-            </p>
-            <hr />
-            <p class="lead">@Model.Message</p>
+<div class="container mt-5 mb-5">
+    <div class="card shadow-lg border-0 rounded-4 announcement-detail-card">
+        <div class="card-body p-5">
+            <h2 class="fw-bold mb-3" style="color:#1b1b1b;">📢 @Model.Title</h2>
 
-            <a href="@Url.Action("Index")" class="btn btn-outline-success mt-3">← Back to Announcements</a>
+            <p class="text-muted small mb-4">
+                📅 Posted on <strong>@Model.Date.ToString("MMMM dd, yyyy")</strong>
+                &nbsp; | &nbsp; 🏢 <strong>@Model.Author</strong>
+            </p>
+
+            <hr class="mb-4" />
+
+            <p class="fs-5 text-secondary" style="line-height:1.7; white-space:pre-line;">
+                @Model.Message
+            </p>
+
+            <div class="mt-4 text-center">
+                <a href="@Url.Action("Index", "Announcements")"
+                   class="btn btn-back btn-animate px-4 py-2">
+                    ← Back to Announcements
+                </a>
+            </div>
         </div>
     </div>
 </div>
+
+<style>
+    :root {
+        --primary-green: #2ecc71;
+        --primary-hover: #27ae60;
+        --text-dark: #1b1b1b;
+        --text-muted: #6b7280;
+        --card-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Card Container */
+    .announcement-detail-card {
+        border-radius: 15px;
+        transition: all 0.3s ease-in-out;
+        background: #ffffff;
+        box-shadow: var(--card-shadow);
+    }
+
+        .announcement-detail-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        }
+
+    /* Typography */
+    h2 {
+        color: var(--text-dark);
+        font-weight: 700;
+        font-size: 1.9rem;
+    }
+
+    p.text-muted {
+        color: var(--text-muted);
+        font-size: 0.95rem;
+    }
+
+    .fs-5 {
+        font-size: 1.1rem;
+        color: #333;
+    }
+
+    /* Back Button */
+    .btn-back {
+        border: 2px solid var(--primary-green);
+        background: var(--primary-green);
+        color: #fff;
+        font-weight: 600;
+        border-radius: 10px;
+        transition: all 0.25s ease-in-out;
+        box-shadow: 0 4px 8px rgba(46, 204, 113, 0.2);
+    }
+
+        .btn-back:hover {
+            background: var(--primary-hover);
+            border-color: var(--primary-hover);
+            color: #fff;
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(39, 174, 96, 0.35);
+        }
+
+    /* Animation on Click (vibration) */
+    .btn-animate:active {
+        animation: vibrate 0.1s linear 2;
+    }
+
+
+
+  
+</style>

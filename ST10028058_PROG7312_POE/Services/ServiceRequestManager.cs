@@ -7,14 +7,14 @@ namespace ST10028058_PROG7312_POE.Services
 {
     public static class ServiceRequestManager
     {
-        // Sorted by Request ID for consistent order
-        private static SortedDictionary<int, ServiceRequestModel> _requests = new();
+        // In-memory store: keeps requests sorted by RequestId
+        private static readonly SortedDictionary<int, ServiceRequestModel> _requests = new();
 
         // Priority queue: smaller number = higher priority
-        private static PriorityQueue<ServiceRequestModel, int> _priorityQueue = new();
+        private static readonly PriorityQueue<ServiceRequestModel, int> _priorityQueue = new();
 
         // Graph of municipal areas (for ExploreNearbyAreas feature)
-        private static Dictionary<string, List<string>> _areaGraph = new()
+        private static readonly Dictionary<string, List<string>> _areaGraph = new()
         {
             { "Central District", new List<string> { "North Zone", "South Zone" } },
             { "North Zone", new List<string> { "Central District", "West End" } },
@@ -24,6 +24,7 @@ namespace ST10028058_PROG7312_POE.Services
         };
 
         private static int _nextId = 1;
+        private static readonly object _lock = new(); // 🔒 Thread safety
 
         // ====== STATIC CONSTRUCTOR TO SEED DATA ======
         static ServiceRequestManager()
@@ -121,65 +122,111 @@ namespace ST10028058_PROG7312_POE.Services
         // ====== CORE CRUD OPERATIONS ======
         public static ServiceRequestModel AddRequest(ServiceRequestModel request)
         {
-            request.RequestId = _nextId++;
-            request.DateSubmitted = DateTime.UtcNow;
+            lock (_lock)
+            {
+                request.RequestId = _nextId++;
+                request.DateSubmitted = DateTime.UtcNow;
+                request.LastUpdated = request.DateSubmitted;
 
-            _requests[request.RequestId] = request;
-            _priorityQueue.Enqueue(request, request.Priority);
-
-            return request;
+                _requests[request.RequestId] = request;
+                _priorityQueue.Enqueue(request, request.Priority);
+                return request;
+            }
         }
 
         public static IEnumerable<ServiceRequestModel> GetAllSortedByDateDescending()
         {
-            return _requests.Values.OrderByDescending(r => r.DateSubmitted);
+            lock (_lock)
+            {
+                return _requests.Values.OrderByDescending(r => r.DateSubmitted).ToList();
+            }
         }
 
         public static ServiceRequestModel? GetById(int id)
         {
-            return _requests.TryGetValue(id, out var r) ? r : null;
+            lock (_lock)
+            {
+                return _requests.TryGetValue(id, out var r) ? r : null;
+            }
         }
 
         public static bool Remove(int id)
         {
-            if (_requests.TryGetValue(id, out var r))
+            lock (_lock)
             {
-                _requests.Remove(id);
-                return true;
+                if (_requests.ContainsKey(id))
+                {
+                    _requests.Remove(id);
+                    return true;
+                }
+                return false;
             }
-            return false;
         }
 
-        public static void UpdateStatus(int id, RequestStatus newStatus)
+        // ====== UPDATE STATUS ======
+        public static bool UpdateStatus(int id, RequestStatus newStatus)
         {
-            if (_requests.TryGetValue(id, out var r))
+            lock (_lock)
             {
-                r.Status = newStatus;
+                if (_requests.TryGetValue(id, out var r))
+                {
+                    if (r.Status != newStatus)
+                    {
+                        r.Status = newStatus;
+                        r.LastUpdated = DateTime.UtcNow;
+                    }
+                    return true;
+                }
+                return false;
+            }
+        }
+
+        // ====== UPDATE PRIORITY ======
+        public static bool UpdatePriority(int id, int newPriority)
+        {
+            lock (_lock)
+            {
+                if (_requests.TryGetValue(id, out var r))
+                {
+                    if (r.Priority != newPriority)
+                    {
+                        r.Priority = newPriority;
+                        r.LastUpdated = DateTime.UtcNow;
+                    }
+                    return true;
+                }
+                return false;
             }
         }
 
         // ====== SEARCH + FILTER ======
         public static IEnumerable<ServiceRequestModel> Search(string? keyword, string? status, string? area)
         {
-            var query = _requests.Values.AsEnumerable();
+            lock (_lock)
+            {
+                var query = _requests.Values.AsEnumerable();
 
-            if (!string.IsNullOrWhiteSpace(keyword))
-                query = query.Where(r => r.Title.Contains(keyword, StringComparison.OrdinalIgnoreCase)
-                                       || r.Description.Contains(keyword, StringComparison.OrdinalIgnoreCase));
+                if (!string.IsNullOrWhiteSpace(keyword))
+                    query = query.Where(r => r.Title.Contains(keyword, StringComparison.OrdinalIgnoreCase)
+                                           || r.Description.Contains(keyword, StringComparison.OrdinalIgnoreCase));
 
-            if (!string.IsNullOrWhiteSpace(status) && Enum.TryParse<RequestStatus>(status, out var parsedStatus))
-                query = query.Where(r => r.Status == parsedStatus);
+                if (!string.IsNullOrWhiteSpace(status) && Enum.TryParse<RequestStatus>(status, out var parsedStatus))
+                    query = query.Where(r => r.Status == parsedStatus);
 
-            if (!string.IsNullOrWhiteSpace(area))
-                query = query.Where(r => r.Area.Equals(area, StringComparison.OrdinalIgnoreCase));
+                if (!string.IsNullOrWhiteSpace(area))
+                    query = query.Where(r => r.Area.Equals(area, StringComparison.OrdinalIgnoreCase));
 
-            return query.OrderByDescending(r => r.DateSubmitted);
+                return query.OrderByDescending(r => r.DateSubmitted).ToList();
+            }
         }
 
         // ====== PRIORITY QUEUE FEATURE ======
         public static ServiceRequestModel? PeekTopPriority()
         {
-            return _priorityQueue.TryPeek(out var top, out _) ? top : null;
+            lock (_lock)
+            {
+                return _priorityQueue.TryPeek(out var top, out _) ? top : null;
+            }
         }
 
         // ====== GRAPH: Nearby Area Feature ======

@@ -79,11 +79,66 @@ namespace ST10028058_PROG7312_POE.Controllers
             };
         }
 
-        // === INDEX ===
-        public IActionResult Index()
+        // === INDEX with Filters & Sorting ===
+        public IActionResult Index(
+            string? q,
+            string? author,
+            DateTime? fromDate,
+            DateTime? toDate,
+            string? sortBy,
+            string? order)
         {
-            var list = _announcements.Values.OrderByDescending(a => a.Date).ToList();
-            return View(list);
+            var list = _announcements.Values.AsEnumerable();
+
+            // === Search (title or message) ===
+            if (!string.IsNullOrWhiteSpace(q))
+            {
+                string term = q.Trim().ToLower();
+                list = list.Where(a =>
+                    a.Title.ToLower().Contains(term) ||
+                    a.Message.ToLower().Contains(term));
+            }
+
+            // === Filter by Author ===
+            if (!string.IsNullOrWhiteSpace(author))
+            {
+                list = list.Where(a => a.Author == author);
+            }
+
+            // === Date Range Filter ===
+            if (fromDate.HasValue)
+            {
+                list = list.Where(a => a.Date >= fromDate.Value);
+            }
+
+            if (toDate.HasValue)
+            {
+                list = list.Where(a => a.Date <= toDate.Value);
+            }
+
+            // === Sorting ===
+            bool ascending = order?.ToLower() == "asc";
+
+            list = sortBy switch
+            {
+                "title" => ascending
+                    ? list.OrderBy(a => a.Title)
+                    : list.OrderByDescending(a => a.Title),
+                "date" => ascending
+                    ? list.OrderBy(a => a.Date)
+                    : list.OrderByDescending(a => a.Date),
+                _ => list.OrderByDescending(a => a.Date) // default: newest first
+            };
+
+            // === Pass current filters to ViewBag for persistence ===
+            ViewBag.Search = q;
+            ViewBag.Author = author;
+            ViewBag.FromDate = fromDate?.ToString("yyyy-MM-dd");
+            ViewBag.ToDate = toDate?.ToString("yyyy-MM-dd");
+            ViewBag.SortBy = sortBy;
+            ViewBag.SortOrder = ascending ? "asc" : "desc";
+
+            return View(list.ToList());
         }
 
         // === CREATE (GET) ===

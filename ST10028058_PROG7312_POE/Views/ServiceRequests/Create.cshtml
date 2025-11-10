@@ -3,44 +3,121 @@
     ViewData["Title"] = "Submit Service Request";
 }
 
-<div class="container mt-4">
-    <h2>Submit a New Service Request</h2>
+<div class="container mt-5 mb-5">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold text-dark">
+            📝 Submit a New Service Request
+        </h2>
+    </div>
 
-    @if (TempData["Error"] != null)
-    {
-        <div class="alert alert-danger">@TempData["Error"]</div>
-    }
-
-    <form asp-action="Create" method="post" enctype="multipart/form-data">
-        <div class="mb-3">
-            <label asp-for="Title" class="form-label"></label>
-            <input asp-for="Title" class="form-control" />
-            <span asp-validation-for="Title" class="text-danger"></span>
+    <!-- Form Card -->
+    <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+        <div class="card-header text-white py-4" style="background: linear-gradient(90deg, #28a745, #20c997);">
+            <h4 class="fw-bold mb-0">Request Details</h4>
         </div>
 
-        <div class="mb-3">
-            <label asp-for="Description" class="form-label"></label>
-            <textarea asp-for="Description" class="form-control" rows="3"></textarea>
-            <span asp-validation-for="Description" class="text-danger"></span>
-        </div>
+        <div class="card-body p-4 bg-light">
+            <form asp-action="Create" method="post">
+                <!-- Title -->
+                <div class="mb-3">
+                    <label asp-for="Title" class="form-label fw-semibold text-dark">
+                        <i class="bi bi-pencil-square me-2 text-success"></i>Title
+                    </label>
+                    <input asp-for="Title" class="form-control form-control-lg rounded-3 shadow-sm" placeholder="Enter request title" />
+                    <span asp-validation-for="Title" class="text-danger small"></span>
+                </div>
 
-        <div class="mb-3">
-            <label asp-for="Area" class="form-label"></label>
-            <input asp-for="Area" class="form-control" />
-            <span asp-validation-for="Area" class="text-danger"></span>
-        </div>
+                <!-- Description -->
+                <div class="mb-3">
+                    <label asp-for="Description" class="form-label fw-semibold text-dark">
+                        <i class="bi bi-chat-text me-2 text-success"></i>Description
+                    </label>
+                    <textarea asp-for="Description" class="form-control form-control-lg rounded-3 shadow-sm" rows="4" placeholder="Describe the issue..."></textarea>
+                    <span asp-validation-for="Description" class="text-danger small"></span>
+                </div>
 
-        <div class="mb-3">
-            <label asp-for="Category" class="form-label"></label>
-            <input asp-for="Category" class="form-control" />
-            <span asp-validation-for="Category" class="text-danger"></span>
-        </div>
+                <!-- Area -->
+                <div class="mb-3">
+                    <label asp-for="Area" class="form-label fw-semibold text-dark">
+                        <i class="bi bi-geo-alt me-2 text-success"></i>Area
+                    </label>
+                    <input asp-for="Area" class="form-control form-control-lg rounded-3 shadow-sm" placeholder="Enter area (e.g., South Zone, East Ward)" />
+                    <span asp-validation-for="Area" class="text-danger small"></span>
+                </div>
 
-        <button type="submit" class="btn btn-success">Submit Request</button>
-        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
-    </form>
+                <!-- Category -->
+                <div class="mb-4">
+                    <label asp-for="Category" class="form-label fw-semibold text-dark">
+                        <i class="bi bi-tags me-2 text-success"></i>Category
+                    </label>
+                    <select asp-for="Category" class="form-select form-select-lg rounded-3 shadow-sm">
+                        <option value="">Select a category</option>
+                        <option>Roads</option>
+                        <option>Electricity</option>
+                        <option>Sanitation</option>
+                        <option>Water</option>
+                        <option>Maintenance</option>
+                        <option>Utilities</option>
+                    </select>
+                    <span asp-validation-for="Category" class="text-danger small"></span>
+                </div>
+
+                <!-- Buttons -->
+                <div class="d-flex justify-content-end gap-2 mt-4">
+                    <button type="submit" class="btn btn-gradient px-4 py-2 fw-bold text-white">
+                        <i class="bi bi-send me-2"></i>Submit Request
+                    </button>
+                    <a asp-action="Index" class="btn btn-outline-danger px-4 py-2 fw-bold">
+                        <i class="bi bi-x-circle me-2"></i>Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
+
+<!-- Custom Styling -->
+<style>
+    /* Gradient button (matches other pages) */
+    .btn-gradient {
+        background: linear-gradient(90deg, #28a745, #20c997);
+        border: none;
+        transition: all 0.2s ease;
+    }
+
+        .btn-gradient:hover {
+            transform: translateY(-1px);
+            background: linear-gradient(90deg, #218838, #17a589);
+        }
+
+    /* Inputs */
+    .form-control, .form-select {
+        border: 1px solid #ccc;
+        transition: all 0.2s ease-in-out;
+    }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #28a745;
+            box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+        }
+
+    /* Card styling */
+    .card {
+        background-color: #fff;
+        transition: all 0.2s ease-in-out;
+    }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        }
+
+    label i {
+        opacity: 0.85;
+    }
+</style>
