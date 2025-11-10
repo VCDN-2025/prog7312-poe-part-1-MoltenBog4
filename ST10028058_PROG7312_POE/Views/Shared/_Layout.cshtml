@@ -18,7 +18,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - ST10028058_PROG7312_POE</title>
+    <title>@ViewData["Title"] - MunicipalConnect</title>
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -34,17 +34,17 @@
 
         /* === NAVBAR === */
         .navbar {
-            background-color: var(--primary-green) !important; /* Green background */
+            background-color: var(--primary-green) !important;
         }
 
             .navbar .nav-link {
-                color: #212529 !important; /* Dark text */
+                color: #212529 !important;
                 font-weight: 500;
                 transition: all 0.2s ease-in-out;
             }
 
                 .navbar .nav-link:hover {
-                    color: #000 !important; /* Darker hover */
+                    color: #000 !important;
                     text-decoration: underline;
                 }
 
@@ -57,26 +57,20 @@
                 .navbar .nav-link.disabled {
                     opacity: .6;
                     pointer-events: none;
-                    color: #495057 !important; /* subtle gray */
+                    color: #495057 !important;
                 }
 
         .navbar-brand {
-            color: #212529 !important; /* Dark brand text */
+            color: #212529 !important;
             font-weight: 700;
             letter-spacing: 0.5px;
         }
 
-        /* Right-side user info + buttons */
         .navbar-text,
         .nav-link.btn {
-            color: #212529 !important; /* Dark user info and logout/login */
-        }
-
-        form .btn-link {
             color: #212529 !important;
         }
 
-        /* === FOOTER === */
         footer {
             background-color: #f1f1f1;
             color: #333;
@@ -99,64 +93,71 @@
 
                 <div id="mainNavbar" class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <!-- Report Issue (Common) -->
+
+                        <!-- Common Links -->
                         <li class="nav-item">
                             <a class="nav-link @Active("issues", "create")"
-                               asp-controller="Issues" asp-action="Create">Report Issues</a>
+                               asp-controller="Issues" asp-action="Create">Report Issue</a>
                         </li>
 
-                        <!-- Citizen Events -->
+                        <!-- Citizen Links -->
                         @if (SignInManager.IsSignedIn(User) && User.IsInRole("Citizen"))
                         {
                             <li class="nav-item">
                                 <a class="nav-link @Active("events", "index")"
-                                   asp-controller="Events" asp-action="Index">Local Events &amp; Announcements</a>
+                                   asp-controller="Events" asp-action="Index">Local Events</a>
                             </li>
-                        }
 
-                        <!-- Admin Manage Events -->
-                        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-                        {
                             <li class="nav-item">
-                                <a class="nav-link @Active("adminevents", "index")"
-                                   asp-controller="AdminEvents" asp-action="Index">Manage Events</a>
+                                <a class="nav-link @Active("announcements", "index")"
+                                   asp-controller="Announcements" asp-action="Index">Announcements</a>
                             </li>
-                        }
 
-                        <!-- Service Request Placeholder -->
-                        <li class="nav-item">
-                            <a class="nav-link disabled" tabindex="-1" aria-disabled="true" title="Coming soon">
-                                Service Request Status
-                            </a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link @Active("servicerequests", "index")"
+                                   asp-controller="ServiceRequests" asp-action="Index">Service Request Status</a>
+                            </li>
 
-                        <!-- All Reports -->
-                        <li class="nav-item ms-sm-3">
-                            <a class="nav-link @Active("issues", "index")"
-                               asp-controller="Issues" asp-action="Index">All Reports</a>
-                        </li>
-
-                        <!-- Citizen Feedback -->
-                        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Citizen"))
-                        {
                             <li class="nav-item ms-sm-3">
                                 <a class="nav-link @Active("feedback", "myhistory")"
                                    asp-controller="Feedback" asp-action="MyHistory">My Feedback</a>
                             </li>
                         }
 
-                        <!-- Admin Management Links -->
+                        <!-- Admin Links -->
                         @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                         {
-                            <li class="nav-item ms-sm-3">
-                                <a class="nav-link @Active("adminissues", "index")"
-                                   asp-controller="AdminIssues" asp-action="Index">All Issues</a>
-                            </li>
-                            <li class="nav-item ms-sm-3">
-                                <a class="nav-link @Active("adminfeedback", "index")"
-                                   asp-controller="AdminFeedback" asp-action="Index">All Feedback</a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle @Active("adminevents") @Active("adminannouncements") @Active("adminservicerequests")"
+                                   href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Manage
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="adminDropdown">
+                                    <li>
+                                        <a class="dropdown-item" asp-controller="AdminEvents" asp-action="Index">Events</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-controller="AdminAnnouncements" asp-action="Index">Announcements</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-controller="AdminServiceRequests" asp-action="Index">Service Requests</a>
+                                    </li>
+                                    <li><hr class="dropdown-divider" /></li>
+                                    <li>
+                                        <a class="dropdown-item" asp-controller="AdminIssues" asp-action="Index">All Issues</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-controller="AdminFeedback" asp-action="Index">All Feedback</a>
+                                    </li>
+                                </ul>
                             </li>
                         }
+
+                        <!-- All Reports -->
+                        <li class="nav-item ms-sm-3">
+                            <a class="nav-link @Active("issues", "index")"
+                               asp-controller="Issues" asp-action="Index">All Reports</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side: User Info / Login -->

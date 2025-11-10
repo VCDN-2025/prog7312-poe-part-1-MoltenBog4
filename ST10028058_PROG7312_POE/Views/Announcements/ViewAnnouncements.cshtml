@@ -1,0 +1,19 @@
+﻿@model ST10028058_PROG7312_POE.Models.AnnouncementModel
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-body">
+            <h2>@Model.Title</h2>
+            <p class="text-muted mb-3">
+                Posted on @Model.Date.ToString("MMMM dd, yyyy") by <strong>@Model.Author</strong>
+            </p>
+            <hr />
+            <p class="lead">@Model.Message</p>
+
+            <a href="@Url.Action("Index")" class="btn btn-outline-success mt-3">← Back to Announcements</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,110 @@
+﻿@model IEnumerable<ST10028058_PROG7312_POE.Models.AnnouncementModel>
+@{
+    ViewData["Title"] = "City Announcements";
+}
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">📢 City Announcements</h2>
+
+    <!-- Search and Sort Controls -->
+    <form method="get" class="row mb-4 justify-content-center bg-light p-3 rounded shadow-sm">
+        <div class="col-md-4 mb-2">
+            <input type="text" name="search" value="@ViewBag.Search" class="form-control"
+                   placeholder="Search announcements..." />
+        </div>
+        <div class="col-md-3 mb-2">
+            <select name="sortOption" class="form-select" onchange="this.form.submit()">
+                <option value="">Sort by: Date (Newest)</option>
+
+                @if (ViewBag.SortOption == "title")
+                {
+                    <option value="title" selected>Title (A–Z)</option>
+                }
+                else
+                {
+                    <option value="title">Title (A–Z)</option>
+                }
+
+                @if (ViewBag.SortOption == "author")
+                {
+                    <option value="author" selected>Author (A–Z)</option>
+                }
+                else
+                {
+                    <option value="author">Author (A–Z)</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-2 mb-2">
+            <button type="submit" class="btn btn-success w-100">Apply</button>
+        </div>
+    </form>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info text-center">
+            No announcements found.
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var announcement in Model)
+            {
+                <div class="col-md-6 mb-4">
+                    <div class="card shadow-sm h-100 border-0">
+                        <div class="card-body">
+                            <h5 class="card-title">@announcement.Title</h5>
+                            <p class="text-muted mb-2">
+                                Posted on @announcement.Date.ToString("MMMM dd, yyyy") by
+                                <strong>@announcement.Author</strong>
+                            </p>
+                            <p class="card-text text-truncate" style="max-height: 4rem;">
+                                @announcement.Message
+                            </p>
+                            <a href="@Url.Action("ViewAnnouncement", new { date = announcement.Date })"
+                               class="btn btn-outline-success btn-sm">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+<style>
+    /* === MunicipalConnect Styling Consistency === */
+    :root {
+        --primary-green: #32CD32;
+        --primary-hover: #28b428;
+    }
+
+    .btn-success {
+        background-color: var(--primary-green);
+        border-color: var(--primary-green);
+    }
+
+        .btn-success:hover {
+            background-color: var(--primary-hover);
+            border-color: var(--primary-hover);
+        }
+
+    .btn-outline-success {
+        color: var(--primary-green);
+        border-color: var(--primary-green);
+    }
+
+        .btn-outline-success:hover {
+            background-color: var(--primary-green);
+            color: white;
+        }
+
+    .form-select, .form-control {
+        border-radius: 8px;
+    }
+
+    h2 {
+        color: #1b1b1b;
+        font-weight: 700;
+    }
+</style>

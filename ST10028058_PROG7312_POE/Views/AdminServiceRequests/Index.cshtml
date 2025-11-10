@@ -1,0 +1,67 @@
+﻿@model IEnumerable<ST10028058_PROG7312_POE.Models.ServiceRequestModel>
+@{
+    ViewData["Title"] = "Manage Service Requests";
+}
+
+<div class="container mt-4">
+    <h2>Admin — Manage Service Requests</h2>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">@TempData["Success"]</div>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">@TempData["Error"]</div>
+    }
+
+    @if (ViewBag.TopPriority != null)
+    {
+        <div class="alert alert-warning">
+            <strong>🚨 Highest Priority:</strong> @ViewBag.TopPriority.Title (@ViewBag.TopPriority.Category)
+        </div>
+    }
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">No service requests available.</div>
+    }
+    else
+    {
+        <table class="table table-striped table-bordered align-middle">
+            <thead class="table-success">
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Area</th>
+                    <th>Category</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var r in Model)
+                {
+                    <tr>
+                        <td>@r.RequestId</td>
+                        <td>@r.Title</td>
+                        <td>@r.Area</td>
+                        <td>@r.Category</td>
+                        <td>@r.Priority</td>
+                        <td>@r.Status</td>
+                        <td>@r.DateSubmitted.ToLocalTime().ToString("yyyy-MM-dd")</td>
+                        <td>
+                            <a class="btn btn-sm btn-info" asp-action="ViewRequest" asp-route-id="@r.RequestId">View</a>
+                            <form asp-action="Delete" method="post" class="d-inline" onsubmit="return confirm('Delete request @r.RequestId ?');">
+                                <input type="hidden" name="id" value="@r.RequestId" />
+                                <button class="btn btn-sm btn-danger" type="submit">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

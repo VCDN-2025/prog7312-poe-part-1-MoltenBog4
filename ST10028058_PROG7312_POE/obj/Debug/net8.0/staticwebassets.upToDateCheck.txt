@@ -74,3 +74,4 @@ wwwroot\uploads\dc19837b-2d72-4ccf-ba7a-d9d7d9bc38d8.pdf
 wwwroot\uploads\edfc2be1-bdd6-4a59-a2ba-3a6aa96922af.jpg
 wwwroot\uploads\f4b9eddd-6d09-494c-bb4a-568375857928.pdf
 wwwroot\uploads\fd13b555-f9c1-4a1e-b44c-372321d08a3a.pdf
+wwwroot\uploads\e99cd3cd-80e4-47d5-81a1-bb1b4592274d.jpg

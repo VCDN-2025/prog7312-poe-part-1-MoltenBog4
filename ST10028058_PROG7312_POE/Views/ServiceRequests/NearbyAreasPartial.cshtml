@@ -1,0 +1,16 @@
+﻿@{
+    var nearbyAreas = ViewBag.AreasNearby as List<string>;
+}
+
+@if (nearbyAreas != null && nearbyAreas.Any())
+{
+    <div class="alert alert-light border mt-3">
+        <strong>Nearby Connected Areas:</strong>
+        <ul class="mb-0">
+            @foreach (var area in nearbyAreas)
+            {
+                <li>@area</li>
+            }
+        </ul>
+    </div>
+}

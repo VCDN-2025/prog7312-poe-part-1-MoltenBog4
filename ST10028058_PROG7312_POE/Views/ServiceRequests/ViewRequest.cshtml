@@ -1,0 +1,19 @@
+﻿@model ST10028058_PROG7312_POE.Models.ServiceRequestModel
+@{
+    ViewData["Title"] = "View Request";
+}
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-body">
+            <h3>@Model.Title <small class="text-muted">(#@Model.RequestId)</small></h3>
+            <p class="text-muted">@Model.Category • @Model.Area</p>
+            <p class="mb-3">@Model.Description</p>
+            <p><strong>Status:</strong> <span class="badge bg-secondary">@Model.Status</span></p>
+            <p><strong>Priority:</strong> @Model.Priority</p>
+            <p class="small text-muted">Submitted: @Model.DateSubmitted.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</p>
+
+            <a class="btn btn-outline-primary" asp-action="Index">Back to List</a>
+        </div>
+    </div>
+</div>
