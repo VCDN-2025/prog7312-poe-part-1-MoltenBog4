@@ -102,6 +102,8 @@ Part 2 updates done with POE/Part 3 implementation
 
 The presentation visually explains **algorithmic efficiency** and **system responsiveness**, reflecting real-world usability testing.
 
+Part 1 Video:https://youtu.be/ONAEioCP_Fk
+Part 2 Video:https://youtu.be/Zlaezj9AP3M
 ---
 
 ## 🧠 **Key Learnings and Outcomes**
