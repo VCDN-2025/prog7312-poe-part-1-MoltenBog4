@@ -88,7 +88,7 @@ The **Part 3 video presentation** showcases the entire municipal services system
 
 ### 🎬 **Watch Here:**
 
-👉 [**Municipal Services Platform – Final Demonstration (Sashiel Moonsamy)**]([https://youtu.be/YOUR_VIDEO_LINK_HERE](https://youtu.be/OcBMElTKHeY))
+👉 [**Municipal Services Platform – Final Demonstration (Sashiel Moonsamy)**]([https://youtu.be/OcBMElTKHeY])
 
 ### 🧾 **Video Highlights:**
 Part 2 updates done with POE/Part 3 implementation
